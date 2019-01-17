@@ -1,0 +1,6 @@
+usr/local/bin/marbellachain-qt usr/bin
+share/pixmaps/marbellachain32.xpm usr/share/pixmaps
+share/pixmaps/marbellachain16.xpm usr/share/pixmaps
+share/pixmaps/marbellachain128.png usr/share/pixmaps
+debian/marbellachain-qt.desktop usr/share/applications
+debian/marbellachain-qt.protocol usr/share/kde4/services/

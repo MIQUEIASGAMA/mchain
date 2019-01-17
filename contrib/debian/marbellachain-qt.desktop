@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Bitcoin Core
+Comment=Connect to the MarbellaChain P2P Network
+Exec=marbellachain-qt %u
+Terminal=false
+Type=Application
+Icon=marbellachain128
+MimeType=x-scheme-handler/marbellachain;
+Categories=Office;Finance;
+StartupWMClass=MarbellaChain-qt
+Name[en_US]=marbellachain-qt
