@@ -22,7 +22,7 @@ from .script import (
     hash160,
 )
 from .util import assert_equal
-from .marbellachainconfig import INITIAL_BLOCK_REWARD
+from .mchainconfig import INITIAL_BLOCK_REWARD
 
 # Create a block (with regtest difficulty)
 def create_block(hashprev, coinbase, nTime=None):

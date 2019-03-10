@@ -1,21 +1,21 @@
 
 Debian
 ====================
-This directory contains files used to package marbellachaind/marbellachain-qt
-for Debian-based Linux systems. If you compile marbellachaind/marbellachain-qt yourself, there are some useful files here.
+This directory contains files used to package mchaind/mchain-qt
+for Debian-based Linux systems. If you compile mchaind/mchain-qt yourself, there are some useful files here.
 
-## marbellachain: URI support ##
+## mchain: URI support ##
 
 
-marbellachain-qt.desktop  (Gnome / Open Desktop)
+mchain-qt.desktop  (Gnome / Open Desktop)
 To install:
 
-	sudo desktop-file-install marbellachain-qt.desktop
+	sudo desktop-file-install mchain-qt.desktop
 	sudo update-desktop-database
 
 If you build yourself, you will either need to modify the paths in
-the .desktop file or copy or symlink your marbellachain-qt binary to `/usr/bin`
+the .desktop file or copy or symlink your mchain-qt binary to `/usr/bin`
 and the `../../share/pixmaps/bitcoin128.png` to `/usr/share/pixmaps`
 
-marbellachain-qt.protocol (KDE)
+mchain-qt.protocol (KDE)
 

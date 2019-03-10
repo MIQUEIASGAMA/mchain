@@ -122,8 +122,8 @@
         <translation>Address king pamag-Tanggap</translation>
     </message>
     <message>
-        <source>Send coins to a MarbellaChain address</source>
-        <translation>Magpadalang barya king MarbellaChain address</translation>
+        <source>Send coins to a Mchain address</source>
+        <translation>Magpadalang barya king Mchain address</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -146,8 +146,8 @@
         <translation>&amp;Beripikan ing message...</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -289,8 +289,8 @@
         <translation>Malaus ka</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>Error</source>
@@ -326,8 +326,8 @@
         <translation>&amp;Network</translation>
     </message>
     <message>
-        <source>Automatically open the MarbellaChain client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Ibuklat yang antimanu ing MarbellaChain client port king router. Gagana yamu ini istung ing router mu susuporta yang UPnP at magsilbi ya.</translation>
+        <source>Automatically open the Mchain client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Ibuklat yang antimanu ing Mchain client port king router. Gagana yamu ini istung ing router mu susuporta yang UPnP at magsilbi ya.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -405,8 +405,8 @@
         <translation>Form</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the MarbellaChain network after a connection is established, but this process has not completed yet.</source>
-        <translation>Ing makaltong impormasion mapalyaring luma ne. Ing kekang wallet otomatiku yang mag-synchronize keng MarbellaChain network istung mekakonekta ne king network, oneng ing prosesung ini ali ya pa kumpletu.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Mchain network after a connection is established, but this process has not completed yet.</source>
+        <translation>Ing makaltong impormasion mapalyaring luma ne. Ing kekang wallet otomatiku yang mag-synchronize keng Mchain network istung mekakonekta ne king network, oneng ing prosesung ini ali ya pa kumpletu.</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
@@ -659,8 +659,8 @@
         <translation>Kopyan ing kasalungsungan pirma king system clipboard</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this MarbellaChain address</source>
-        <translation>Pirman ing mensayi ban patune na keka ya ining MarbellaChain address</translation>
+        <source>Sign the message to prove you own this Mchain address</source>
+        <translation>Pirman ing mensayi ban patune na keka ya ining Mchain address</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -679,8 +679,8 @@
         <translation>&amp;Beripikan ing Mensayi</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified MarbellaChain address</source>
-        <translation>Beripikan ing mensayi ban asiguradu a me pirma ya ini gamit ing mepiling MarbellaChain address</translation>
+        <source>Verify the message to ensure it was signed with the specified Mchain address</source>
+        <translation>Beripikan ing mensayi ban asiguradu a me pirma ya ini gamit ing mepiling Mchain address</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -730,7 +730,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Options:</source>
         <translation>Pipamilian:</translation>
@@ -756,8 +756,8 @@
         <translation>Gumana king gulut bilang daemon at tumanggap commands</translation>
     </message>
     <message>
-        <source>MarbellaChain Core</source>
-        <translation>Kapilubluban ning MarbellaChain</translation>
+        <source>Mchain Core</source>
+        <translation>Kapilubluban ning Mchain</translation>
     </message>
     <message>
         <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>

@@ -10,8 +10,8 @@
 #include <util.h>
 #include <utilstrencodings.h>
 
-#include <marbellachain/marbellachainstate.h>
-#include <marbellachain/marbellachaintransaction.h>
+#include <mchain/mchainstate.h>
+#include <mchain/mchaintransaction.h>
 #include <validation.h>
 
 typedef std::vector<unsigned char> valtype;
@@ -186,7 +186,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
                 else
                     break;
             }
-            /////////////////////////////////////////////////////////// marbellachain
+            /////////////////////////////////////////////////////////// mchain
             else if (opcode2 == OP_VERSION)
             {
                 if(0 <= opcode1 && opcode1 <= OP_PUSHDATA4)

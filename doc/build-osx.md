@@ -40,18 +40,18 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see the section *Disable-Wallet mode* below).
 
-Build MarbellaChain Core
+Build Mchain Core
 ------------------------
 
-1. Clone the marbellachain source code and cd into `marbellachain`
+1. Clone the mchain source code and cd into `mchain`
 
-        git clone --recursive https://github.com/marbellachain/marbellachain.git
-        cd marbellachain
+        git clone --recursive https://github.com/mchainnetwork/mchain.git
+        cd mchain
         git submodule update --init --recursive
 
-2.  Build marbellachain-core:
+2.  Build mchain-core:
 
-    Configure and build the headless marbellachain binaries as well as the GUI (if Qt is found).
+    Configure and build the headless mchain binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 

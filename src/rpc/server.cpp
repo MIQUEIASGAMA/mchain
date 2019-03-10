@@ -233,11 +233,11 @@ UniValue stop(const JSONRPCRequest& jsonRequest)
     if (jsonRequest.fHelp || jsonRequest.params.size() > 1)
         throw std::runtime_error(
             "stop\n"
-            "\nStop MarbellaChain server.");
+            "\nStop Mchain server.");
     // Event loop will exit after current HTTP requests have been handled, so
     // this reply will get back to the client.
     StartShutdown();
-    return "MarbellaChain server stopping";
+    return "Mchain server stopping";
 }
 
 UniValue uptime(const JSONRPCRequest& jsonRequest)
@@ -552,7 +552,7 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(const std::string& methodname, const std::string& args)
 {
-    return "> marbellachain-cli " + methodname + " " + args + "\n";
+    return "> mchain-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(const std::string& methodname, const std::string& args)

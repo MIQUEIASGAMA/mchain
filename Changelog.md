@@ -1,4 +1,4 @@
-This document describes breaking changes between MarbellaChain releases for both RPC APIs and for blockchain consensus.
+This document describes breaking changes between Mchain releases for both RPC APIs and for blockchain consensus.
 
 # Sparknet (Testnet v1)
 

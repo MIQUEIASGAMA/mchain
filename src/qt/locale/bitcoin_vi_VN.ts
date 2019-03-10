@@ -315,8 +315,8 @@ Ví của bạn chưa được mã hóa.</translation>
         <translation>Đánh chỉ số (indexing) lại các khối (blocks) trên ổ đĩa ...</translation>
     </message>
     <message>
-        <source>Send coins to a MarbellaChain address</source>
-        <translation>Gửi coins đến tài khoản MarbellaChain</translation>
+        <source>Send coins to a Mchain address</source>
+        <translation>Gửi coins đến tài khoản Mchain</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -339,8 +339,8 @@ Ví của bạn chưa được mã hóa.</translation>
         <translation>&amp;Tin nhắn xác thực</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -367,12 +367,12 @@ Ví của bạn chưa được mã hóa.</translation>
         <translation>Mã hoá các khoá bí mật trong Ví của bạn.</translation>
     </message>
     <message>
-        <source>Sign messages with your MarbellaChain addresses to prove you own them</source>
-        <translation>Dùng địa chỉ MarbellaChain của bạn ký các tin nhắn để xác minh những nội dung tin nhắn đó là của bạn.</translation>
+        <source>Sign messages with your Mchain addresses to prove you own them</source>
+        <translation>Dùng địa chỉ Mchain của bạn ký các tin nhắn để xác minh những nội dung tin nhắn đó là của bạn.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified MarbellaChain addresses</source>
-        <translation>Kiểm tra các tin nhắn để chắc chắn rằng chúng được ký bằng các địa chỉ MarbellaChain xác định.</translation>
+        <source>Verify messages to ensure they were signed with specified Mchain addresses</source>
+        <translation>Kiểm tra các tin nhắn để chắc chắn rằng chúng được ký bằng các địa chỉ Mchain xác định.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -391,8 +391,8 @@ Ví của bạn chưa được mã hóa.</translation>
         <translation>Thanh công cụ (toolbar)</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and marbellachain: URIs)</source>
-        <translation>Yêu cầu thanh toán(tạo mã QR và địa chỉ MarbellaChain: URLs)</translation>
+        <source>Request payments (generates QR codes and mchain: URIs)</source>
+        <translation>Yêu cầu thanh toán(tạo mã QR và địa chỉ Mchain: URLs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -403,16 +403,16 @@ Ví của bạn chưa được mã hóa.</translation>
         <translation>Hiện thỉ danh sách các địa chỉ và nhãn đã dùng để nhận.</translation>
     </message>
     <message>
-        <source>Open a marbellachain: URI or payment request</source>
-        <translation>Mở marbellachain:URL hoặc yêu cầu thanh toán</translation>
+        <source>Open a mchain: URI or payment request</source>
+        <translation>Mở mchain:URL hoặc yêu cầu thanh toán</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>7Tùy chọn dòng lệnh</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to MarbellaChain network</source>
-        <translation><numerusform>%n liên kết hoạt động với mạng lưới MarbellaChain</numerusform></translation>
+        <source>%n active connection(s) to Mchain network</source>
+        <translation><numerusform>%n liên kết hoạt động với mạng lưới Mchain</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -455,8 +455,8 @@ Ví của bạn chưa được mã hóa.</translation>
         <translation>Đã cập nhật</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible MarbellaChain command-line options</source>
-        <translation>Hiển thị tin nhắn trợ giúp %1 để có được danh sách với các tùy chọn dòng lệnh MarbellaChain.</translation>
+        <source>Show the %1 help message to get a list with possible Mchain command-line options</source>
+        <translation>Hiển thị tin nhắn trợ giúp %1 để có được danh sách với các tùy chọn dòng lệnh Mchain.</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>
@@ -636,8 +636,8 @@ Ví của bạn chưa được mã hóa.</translation>
         <translation>Sử dụng vị trí dữ liệu mặc định</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>Error</source>
@@ -689,8 +689,8 @@ Ví của bạn chưa được mã hóa.</translation>
         <translation>Ví</translation>
     </message>
     <message>
-        <source>Connect to the MarbellaChain network through a SOCKS5 proxy.</source>
-        <translation>Kết nối đến máy chủ MarbellaChain thông qua SOCKS5 proxy.</translation>
+        <source>Connect to the Mchain network through a SOCKS5 proxy.</source>
+        <translation>Kết nối đến máy chủ Mchain thông qua SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1201,14 +1201,14 @@ Ví của bạn chưa được mã hóa.</translation>
     </message>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Options:</source>
         <translation>Lựa chọn:</translation>
     </message>
     <message>
-        <source>MarbellaChain Core</source>
-        <translation>MarbellaChain Core</translation>
+        <source>Mchain Core</source>
+        <translation>Mchain Core</translation>
     </message>
     <message>
         <source>(default: %u)</source>

@@ -17,8 +17,8 @@ osx=true
 SIGNER=
 VERSION=
 commit=false
-url=https://github.com/marbellachain/marbellachain
-ethurl=https://github.com/marbellachain/cpp-eth-marbellachain
+url=https://github.com/mchainnetwork/mchain
+ethurl=https://github.com/mchain/cpp-eth-mchain
 proc=2
 mem=2000
 lxc=true
@@ -32,7 +32,7 @@ commitFiles=true
 read -d '' usage <<- EOF
 Usage: $scriptName [-c|u|v|b|s|B|o|h|j|m|] version
 
-Run this script from the directory containing the marbellachain, gitian-builder, gitian.sigs, and marbellachain-detached-sigs.
+Run this script from the directory containing the mchain, gitian-builder, gitian.sigs, and mchain-detached-sigs.
 
 Arguments:
 --signer signer          GPG signer to sign each build assert file
@@ -40,7 +40,7 @@ version		Version number, commit, or branch to build. If building a commit or bra
 
 Options:
 -c|--commit	Indicate that the version argument is for a commit or branch
--u|--url	Specify the URL of the repository. Default is https://github.com/marbellachain/marbellachain
+-u|--url	Specify the URL of the repository. Default is https://github.com/mchainnetwork/mchain
 -v|--verify 	Verify the Gitian build
 -b|--build	Do a Gitian build
 -s|--sign	Make signed binaries for Windows and Mac OSX
@@ -216,8 +216,8 @@ echo ${COMMIT}
 if [[ $setup = true ]]
 then
     sudo apt-get install ruby apache2 git apt-cacher-ng python-vm-builder qemu-kvm qemu-utils
-    git clone https://github.com/marbellachain/gitian.sigs.git
-    git clone https://github.com/marbellachain/marbellachain-detached-sigs.git
+    git clone https://github.com/mchain/gitian.sigs.git
+    git clone https://github.com/mchainnetwork/mchain-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     pushd ./gitian-builder
     if [[ -n "$USE_LXC" ]]
@@ -246,7 +246,7 @@ then
 	    exit 1
 	fi
 	# Make output folder
-	mkdir -p ./marbellachain-binaries/${VERSION}
+	mkdir -p ./mchain-binaries/${VERSION}
 	
 	# Build Dependencies
 	echo ""
@@ -256,7 +256,7 @@ then
 	mkdir -p inputs
 	wget -N -P inputs $osslPatchUrl
 	wget -N -P inputs $osslTarUrl
-	make -C ../marbellachain/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../mchain/depends download SOURCES_PATH=`pwd`/cache/common
 
 	# Linux
 	if [[ $linux = true ]]
@@ -264,9 +264,9 @@ then
             echo ""
 	    echo "Compiling ${VERSION} Linux"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit marbellachain=${COMMIT},cpp-eth-marbellachain=develop --url marbellachain=${url},cpp-eth-marbellachain=${ethurl} ../marbellachain/contrib/gitian-descriptors/gitian-linux.yml
-	    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../marbellachain/contrib/gitian-descriptors/gitian-linux.yml
-	    mv build/out/marbellachain-*.tar.gz build/out/src/marbellachain-*.tar.gz ../marbellachain-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit mchain=${COMMIT},cpp-eth-mchain=develop --url mchain=${url},cpp-eth-mchain=${ethurl} ../mchain/contrib/gitian-descriptors/gitian-linux.yml
+	    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../mchain/contrib/gitian-descriptors/gitian-linux.yml
+	    mv build/out/mchain-*.tar.gz build/out/src/mchain-*.tar.gz ../mchain-binaries/${VERSION}
 	fi
 	# Windows
 	if [[ $windows = true ]]
@@ -274,10 +274,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit marbellachain=${COMMIT},cpp-eth-marbellachain=develop --url marbellachain=${url},cpp-eth-marbellachain=${ethurl} ../marbellachain/contrib/gitian-descriptors/gitian-win.yml
-	    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../marbellachain/contrib/gitian-descriptors/gitian-win.yml
-	    mv build/out/marbellachain-*-win-unsigned.tar.gz inputs/marbellachain-win-unsigned.tar.gz
-	    mv build/out/marbellachain-*.zip build/out/marbellachain-*.exe ../marbellachain-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit mchain=${COMMIT},cpp-eth-mchain=develop --url mchain=${url},cpp-eth-mchain=${ethurl} ../mchain/contrib/gitian-descriptors/gitian-win.yml
+	    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../mchain/contrib/gitian-descriptors/gitian-win.yml
+	    mv build/out/mchain-*-win-unsigned.tar.gz inputs/mchain-win-unsigned.tar.gz
+	    mv build/out/mchain-*.zip build/out/mchain-*.exe ../mchain-binaries/${VERSION}
 	fi
 	# Mac OSX
 	if [[ $osx = true ]]
@@ -285,10 +285,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit marbellachain=${COMMIT},cpp-eth-marbellachain=develop --url marbellachain=${url},cpp-eth-marbellachain=${ethurl} ../marbellachain/contrib/gitian-descriptors/gitian-osx.yml
-	    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../marbellachain/contrib/gitian-descriptors/gitian-osx.yml
-	    mv build/out/marbellachain-*-osx-unsigned.tar.gz inputs/marbellachain-osx-unsigned.tar.gz
-	    mv build/out/marbellachain-*.tar.gz build/out/marbellachain-*.dmg ../marbellachain-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit mchain=${COMMIT},cpp-eth-mchain=develop --url mchain=${url},cpp-eth-mchain=${ethurl} ../mchain/contrib/gitian-descriptors/gitian-osx.yml
+	    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../mchain/contrib/gitian-descriptors/gitian-osx.yml
+	    mv build/out/mchain-*-osx-unsigned.tar.gz inputs/mchain-osx-unsigned.tar.gz
+	    mv build/out/mchain-*.tar.gz build/out/mchain-*.dmg ../mchain-binaries/${VERSION}
 	fi
 	popd
 
@@ -315,27 +315,27 @@ then
 	echo ""
 	echo "Verifying ${VERSION} Linux"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../marbellachain/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../mchain/contrib/gitian-descriptors/gitian-linux.yml
 	# Windows
 	echo ""
 	echo "Verifying ${VERSION} Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../marbellachain/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../mchain/contrib/gitian-descriptors/gitian-win.yml
 	# Mac OSX	
 	echo ""
 	echo "Verifying ${VERSION} Mac OSX"
 	echo ""	
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../marbellachain/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../mchain/contrib/gitian-descriptors/gitian-osx.yml
 	# Signed Windows
 	echo ""
 	echo "Verifying ${VERSION} Signed Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../marbellachain/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../mchain/contrib/gitian-descriptors/gitian-osx-signer.yml
 	# Signed Mac OSX
 	echo ""
 	echo "Verifying ${VERSION} Signed Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../marbellachain/contrib/gitian-descriptors/gitian-osx-signer.yml	
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../mchain/contrib/gitian-descriptors/gitian-osx-signer.yml	
 	popd
 fi
 
@@ -355,10 +355,10 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../marbellachain/contrib/gitian-descriptors/gitian-win-signer.yml
-	    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../marbellachain/contrib/gitian-descriptors/gitian-win-signer.yml
-	    mv build/out/marbellachain-*win64-setup.exe ../marbellachain-binaries/${VERSION}
-	    mv build/out/marbellachain-*win32-setup.exe ../marbellachain-binaries/${VERSION}
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../mchain/contrib/gitian-descriptors/gitian-win-signer.yml
+	    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../mchain/contrib/gitian-descriptors/gitian-win-signer.yml
+	    mv build/out/mchain-*win64-setup.exe ../mchain-binaries/${VERSION}
+	    mv build/out/mchain-*win32-setup.exe ../mchain-binaries/${VERSION}
 	fi
 	# Sign Mac OSX
 	if [[ $osx = true ]]
@@ -366,9 +366,9 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=master ../marbellachain/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../marbellachain/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    mv build/out/marbellachain-osx-signed.dmg ../marbellachain-binaries/${VERSION}/marbellachain-${VERSION}-osx.dmg
+	    ./bin/gbuild -i --commit signature=master ../mchain/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../mchain/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    mv build/out/mchain-osx-signed.dmg ../mchain-binaries/${VERSION}/mchain-${VERSION}-osx.dmg
 	fi
 	popd
 

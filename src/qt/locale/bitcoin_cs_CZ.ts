@@ -166,8 +166,8 @@
         <translation>Změnit heslo k šifrování peněženky</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -297,8 +297,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     </context>
 <context>
@@ -662,7 +662,7 @@
     </message>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Options:</source>
         <translation>Možnosti:</translation>

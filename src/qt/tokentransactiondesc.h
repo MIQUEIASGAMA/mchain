@@ -1,5 +1,5 @@
-#ifndef MARBELLACHAIN_QT_TOKENTRANSACTIONDESC_H
-#define MARBELLACHAIN_QT_TOKENTRANSACTIONDESC_H
+#ifndef MCHAIN_QT_TOKENTRANSACTIONDESC_H
+#define MCHAIN_QT_TOKENTRANSACTIONDESC_H
 
 #include <QObject>
 #include <QString>
@@ -24,4 +24,4 @@ private:
     static QString FormatTxStatus(CWallet *wallet, const CTokenTx& wtx);
 };
 
-#endif // MARBELLACHAIN_QT_TOKENTRANSACTIONDESC_H
+#endif // MCHAIN_QT_TOKENTRANSACTIONDESC_H

@@ -48,9 +48,9 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "MarbellaChain"
-#define QAPP_ORG_DOMAIN "marbellachain.org"
-#define QAPP_APP_NAME_DEFAULT "MarbellaChain-Qt"
-#define QAPP_APP_NAME_TESTNET "MarbellaChain-Qt-testnet"
+#define QAPP_ORG_NAME "Mchain"
+#define QAPP_ORG_DOMAIN "mchain.network"
+#define QAPP_APP_NAME_DEFAULT "Mchain-Qt"
+#define QAPP_APP_NAME_TESTNET "Mchain-Qt-testnet"
 
 #endif // BITCOIN_QT_GUICONSTANTS_H

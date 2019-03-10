@@ -214,6 +214,6 @@
     </message>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     </context>
 </TS>

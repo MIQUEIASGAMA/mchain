@@ -15,7 +15,7 @@
 
 #include <chainparamsseeds.h>
 
-///////////////////////////////////////////// // marbellachain
+///////////////////////////////////////////// // mchain
 #include <libdevcore/SHA3.h>
 #include <libdevcore/RLP.h>
 #include "arith_uint256.h"
@@ -39,8 +39,8 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     genesis.vtx.push_back(MakeTransactionRef(std::move(txNew)));
     genesis.hashPrevBlock.SetNull();
     genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
-    genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // marbellachain
-    genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // marbellachain
+    genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // mchain
+    genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // mchain
     return genesis;
 }
 
@@ -123,7 +123,7 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 2000000; // marbellachain halving every 4 years
+        consensus.nSubsidyHalvingInterval = 2000000; // mchain halving every 4 years
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256S("0x000075aef83cf2853580f8ae8ce6f8c3096cfa21d98334d6e3f95e5582ed986c");
@@ -153,10 +153,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 999999999999ULL;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00"); // marbellachain
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000216148b5844228b3f"); // mchain
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x00"); //
+        consensus.defaultAssumeValid = uint256S("0xffeee3adeef3674fe568c32bc420ad9e66041d82973a97807891c3a2500f86ef"); // 138297
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -186,8 +186,16 @@ public:
         // This is fine at runtime as we'll fall back to using them as a oneshot if they dont support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        //vSeeds.emplace_back("seed.marbellachain.org"); // MarbellaChain mainnet
-        vSeeds.emplace_back("s1.marbellachain.org");
+        //vSeeds.emplace_back("seed.mchain.network"); // Mchain mainnet
+        vSeeds.emplace_back("s1.mchain.network");
+        vSeeds.emplace_back("s2.mchain.network");
+        vSeeds.emplace_back("s3.mchain.network");
+        vSeeds.emplace_back("s4.mchain.network");
+        vSeeds.emplace_back("s5.mchain.network");
+        vSeeds.emplace_back("s6.mchain.network");
+        vSeeds.emplace_back("s7.mchain.network");
+        vSeeds.emplace_back("s8.mchain.network");
+        vSeeds.emplace_back("s9.mchain.network");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,58);
@@ -205,15 +213,18 @@ public:
 
         checkpointData = {
             {
-                { 0, uint256S("0000cdfed9bb97a00360682a3efd2c5558040ed7bfeadfa1cb6b142df5da4842")}
+                { 0, uint256S("0000cdfed9bb97a00360682a3efd2c5558040ed7bfeadfa1cb6b142df5da4842")},
+                { 2000, uint256S("35c07b070740897b29390bc5cb3a4883ea6930bb8ab9e2702172782f6104391c")},
+                { 34595, uint256S("65414164bf8cc0f223385c0252bb46b3a73bffa3ae2602b39eb04364e24061cd")},
+                { 138297, uint256S("ffeee3adeef3674fe568c32bc420ad9e66041d82973a97807891c3a2500f86ef")}
             }
         };
 
         chainTxData = ChainTxData{
-        	0, // * UNIX timestamp of last known number of transactions
-			0, // * total number of transactions between genesis and that timestamp
+        	1551793680, // * UNIX timestamp of last known number of transactions
+			290655, // * total number of transactions between genesis and that timestamp
                             //   (the tx=... number in the SetBestChain debug.log lines)
-			0 // * estimated number of transactions per second after that timestamp
+			0.06666666666 // * estimated number of transactions per second after that timestamp
         };
         consensus.nLastPOWBlock = 2000;
         consensus.nMPoSRewardRecipients = 10;
@@ -232,7 +243,7 @@ class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nSubsidyHalvingInterval = 2000000; // marbellachain halving every 4 years
+        consensus.nSubsidyHalvingInterval = 2000000; // mchain halving every 4 years
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256S("0x0000e803ee215c0684ca0d2f9220594d3f828617972aad66feb2ba51f5e14222");
@@ -262,7 +273,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 999999999999ULL;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00"); // marbellachain
+        consensus.nMinimumChainWork = uint256S("0x00"); // mchain
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00"); //
@@ -282,7 +293,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("testnetseed.marbellachain.org"); // MarbellaChain testnet
+        vSeeds.emplace_back("testnetseed.mchain.network"); // Mchain testnet
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,110);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,120);
@@ -331,7 +342,7 @@ public:
         strNetworkID = "regtest";
         consensus.nSubsidyHalvingInterval = 150;
         consensus.BIP16Height = 0;
-        consensus.BIP34Height = 0; // BIP34 has not activated on regtest (far in the future so block v1 are not rejected in tests) // activate for marbellachain
+        consensus.BIP34Height = 0; // BIP34 has not activated on regtest (far in the future so block v1 are not rejected in tests) // activate for mchain
         consensus.BIP34Hash = uint256S("0x665ed5b402ac0b44efc37d8926332994363e8a7278b7ee9a58fb972efadae943");
         consensus.BIP65Height = 0; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 0; // BIP66 activated on regtest (Used in rpc activation tests)
@@ -420,7 +431,7 @@ public:
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
 
-        // MARBELLACHAIN have 500 blocks of maturity, increased values for regtest in unit tests in order to correspond with it
+        // MCHAIN have 500 blocks of maturity, increased values for regtest in unit tests in order to correspond with it
         consensus.nSubsidyHalvingInterval = 750;
         consensus.nRuleChangeActivationThreshold = 558; // 75% for testchains
         consensus.nMinerConfirmationWindow = 744; // Faster than normal for regtest (744 instead of 2016)

@@ -90,8 +90,8 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <source>Send coins to a MarbellaChain address</source>
-        <translation>ផ្ញើកាក់ទៅកាន់ អាសយដ្ឋាន MarbellaChain មួយ</translation>
+        <source>Send coins to a Mchain address</source>
+        <translation>ផ្ញើកាក់ទៅកាន់ អាសយដ្ឋាន Mchain មួយ</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -210,6 +210,6 @@
     </message>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     </context>
 </TS>

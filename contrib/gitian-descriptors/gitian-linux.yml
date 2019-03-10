@@ -1,5 +1,5 @@
 ---
-name: "marbellachain-linux-0.16"
+name: "mchain-linux-0.16"
 enable_cache: true
 suites:
 - "trusty"
@@ -33,16 +33,16 @@ packages:
 - "libmicrohttpd-dev"
 - "libminiupnpc-dev"
 remotes:
-- "url": "https://github.com/marbellachain/marbellachain.git"
-  "dir": "marbellachain"
-- "url": "https://github.com/marbellachain/cpp-eth-marbellachain.git"
-  "dir": "cpp-eth-marbellachain"
+- "url": "https://github.com/mchainnetwork/mchain.git"
+  "dir": "mchain"
+- "url": "https://github.com/mchain/cpp-eth-mchain.git"
+  "dir": "cpp-eth-mchain"
 files: []
 script: |
   #this is a hack since gitian has no natural support for submodules
   #make sure this file exists... 
-  cp -r cpp-eth-marbellachain/* marbellachain/src/cpp-ethereum
-  cat marbellachain/src/cpp-ethereum/utils/libscrypt/b64.c 
+  cp -r cpp-eth-mchain/* mchain/src/cpp-ethereum
+  cat mchain/src/cpp-ethereum/utils/libscrypt/b64.c 
 
   WRAP_DIR=$HOME/wrapped
   HOSTS="i686-pc-linux-gnu x86_64-linux-gnu arm-linux-gnueabihf aarch64-linux-gnu"
@@ -124,7 +124,7 @@ script: |
   chmod +x ${WRAP_DIR}/${prog}
   done
 
-  cd marbellachain
+  cd mchain
   BASEPREFIX=`pwd`/depends
   # Build dependencies for each host
   for i in $HOSTS; do
@@ -146,13 +146,13 @@ script: |
   ./autogen.sh
   CONFIG_SITE=${BASEPREFIX}/`echo "${HOSTS}" | awk '{print $1;}'`/share/config.site ./configure --prefix=/
   make V=1 dist
-  SOURCEDIST=`echo marbellachain-*.tar.gz`
+  SOURCEDIST=`echo mchain-*.tar.gz`
   DISTNAME=`echo ${SOURCEDIST} | sed 's/.tar.*//'`
   # Correct tar file order
   mkdir -p temp
   pushd temp
   tar xf ../$SOURCEDIST
-  find marbellachain-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+  find mchain-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
   popd
 
   # Workaround for tarball not building with the bare tag version (prep)

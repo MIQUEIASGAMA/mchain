@@ -20,7 +20,7 @@ from test_framework.util import (
     assert_raises_rpc_error,
     wait_until,
 )
-from test_framework.marbellachainconfig import *
+from test_framework.mchainconfig import *
 
 class ZapWalletTXesTest (BitcoinTestFramework):
     def set_test_params(self):

@@ -127,7 +127,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a MarbellaChain address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a Mchain address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(Params()))));
 #endif
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
@@ -146,7 +146,7 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
 bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
     // return if URI is not valid or is no bitcoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("marbellachain"))
+    if(!uri.isValid() || uri.scheme() != QString("mchain"))
         return false;
 
     SendCoinsRecipient rv;
@@ -210,9 +210,9 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
     //
     //    Cannot handle this later, because bitcoin:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("marbellachain://", Qt::CaseInsensitive))
+    if(uri.startsWith("mchain://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 7, "marbellachain:"); // MAR: change string length to 7 to correctly parse marbellachain://
+        uri.replace(0, 7, "mchain:"); // MAR: change string length to 7 to correctly parse mchain://
     }
     if(uri.startsWith("marbellacoin://", Qt::CaseInsensitive))
     {
@@ -224,7 +224,7 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 
 QString formatBitcoinURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("marbellachain:%1").arg(info.address);
+    QString ret = QString("mchain:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
@@ -632,10 +632,10 @@ fs::path static StartupShortcutPath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "MarbellaChain.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Mchain.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "MarbellaChain (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("MarbellaChain (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Mchain (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Mchain (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -730,8 +730,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "marbellachain.desktop";
-    return GetAutostartDir() / strprintf("marbellachain-%s.lnk", chain);
+        return GetAutostartDir() / "mchain.desktop";
+    return GetAutostartDir() / strprintf("mchain-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -775,9 +775,9 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=MarbellaChain\n";
+            optionFile << "Name=Mchain\n";
         else
-            optionFile << strprintf("Name=MarbellaChain (%s)\n", chain);
+            optionFile << strprintf("Name=Mchain (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", gArgs.GetBoolArg("-testnet", false), gArgs.GetBoolArg("-regtest", false));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";

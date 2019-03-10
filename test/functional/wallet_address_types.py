@@ -62,7 +62,7 @@ from test_framework.util import (
     sync_blocks,
     sync_mempools,
 )
-from test_framework.marbellachainconfig import COINBASE_MATURITY
+from test_framework.mchainconfig import COINBASE_MATURITY
 
 class AddressTypeTest(BitcoinTestFramework):
     def set_test_params(self):

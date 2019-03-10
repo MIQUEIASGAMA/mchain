@@ -1,9 +1,9 @@
 Gitian building
 ================
 
-*Setup instructions for a Gitian build of MarbellaChain Core using a Debian VM or physical system.*
+*Setup instructions for a Gitian build of Mchain Core using a Debian VM or physical system.*
 
-Gitian is the deterministic build process that is used to build the MarbellaChain
+Gitian is the deterministic build process that is used to build the Mchain
 Core executables. It provides a way to be reasonably sure that the
 executables are really built from the source on GitHub. It also makes sure that
 the same, tested dependencies are used and statically built into the executable.
@@ -11,7 +11,7 @@ the same, tested dependencies are used and statically built into the executable.
 Multiple developers build the source code by following a specific descriptor
 ("recipe"), cryptographically sign the result, and upload the resulting signature.
 These results are compared and only if they match, the build is accepted and uploaded
-to marbellachain.org.
+to mchain.network.
 
 More independent Gitian builders are needed, which is why this guide exists.
 It is preferred you follow these steps yourself instead of using someone else's
@@ -26,7 +26,7 @@ Table of Contents
 - [Installing Gitian](#installing-gitian)
 - [Setting up the Gitian image](#setting-up-the-gitian-image)
 - [Getting and building the inputs](#getting-and-building-the-inputs)
-- [Building MarbellaChain Core](#building-marbellachain-core)
+- [Building Mchain Core](#building-mchain-core)
 - [Building an alternative repository](#building-an-alternative-repository)
 - [Signing externally](#signing-externally)
 - [Uploading signatures](#uploading-signatures)
@@ -310,12 +310,12 @@ cd ..
 
 **Note**: When sudo asks for a password, enter the password for the user *debian* not for *root*.
 
-Clone the git repositories for marbellachain and Gitian.
+Clone the git repositories for mchain and Gitian.
 
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
-git clone https://github.com/marbellachain/marbellachain --recursive
-git clone https://github.com/marbellachain/gitian.sigs.git
+git clone https://github.com/mchainnetwork/mchain --recursive
+git clone https://github.com/mchain/gitian.sigs.git
 ```
 
 Setting up the Gitian image
@@ -332,7 +332,7 @@ Execute the following as user `debian`:
 First, we must add the xenial setup script for LXC, as this is missing in older versions of debootstrap:
 
 ```bash
-sudo cp /home/debian/marbellachain/contrib/gitian-descriptors/xenial /usr/share/debootstrap/scripts
+sudo cp /home/debian/mchain/contrib/gitian-descriptors/xenial /usr/share/debootstrap/scripts
 ```
 
 And now with that in place, setup the VM images:
@@ -353,16 +353,16 @@ Getting and building the inputs
 At this point you have two options, you can either use the automated script (found in [contrib/gitian-build.sh](/contrib/gitian-build.sh)) or you could manually do everything by following this guide. If you're using the automated script, then run it with the "--setup" command. Afterwards, run it with the "--build" command (example: "contrib/gitian-build.sh -b signer 0.13.0"). Otherwise ignore this.
 
 Follow the instructions in [doc/release-process.md](release-process.md#fetch-and-create-inputs-first-time-or-when-dependency-versions-change)
-in the marbellachain repository under 'Fetch and create inputs' to install sources which require
+in the mchain repository under 'Fetch and create inputs' to install sources which require
 manual intervention. Also optionally follow the next step: 'Seed the Gitian sources cache
 and offline git repositories' which will fetch the remaining files required for building
 offline.
 
-Building MarbellaChain Core
+Building Mchain Core
 ----------------
 
-To build MarbellaChain Core (for Linux, OS X and Windows) just follow the steps under 'perform
-Gitian builds' in [doc/release-process.md](release-process.md#perform-gitian-builds) in the marbellachain repository.
+To build Mchain Core (for Linux, OS X and Windows) just follow the steps under 'perform
+Gitian builds' in [doc/release-process.md](release-process.md#perform-gitian-builds) in the mchain repository.
 
 This may take some time as it will build all the dependencies needed for each descriptor.
 These dependencies will be cached after a successful build to avoid rebuilding them when possible.
@@ -376,12 +376,12 @@ tail -f var/build.log
 
 Output from `gbuild` will look something like
 
-    Initialized empty Git repository in /home/debian/gitian-builder/inputs/marbellachain/.git/
+    Initialized empty Git repository in /home/debian/gitian-builder/inputs/mchain/.git/
     remote: Counting objects: 57959, done.
     remote: Total 57959 (delta 0), reused 0 (delta 0), pack-reused 57958
     Receiving objects: 100% (57959/57959), 53.76 MiB | 484.00 KiB/s, done.
     Resolving deltas: 100% (41590/41590), done.
-    From https://github.com/marbellachain/marbellachain
+    From https://github.com/mchainnetwork/mchain
     ... (new tags, new branch etc)
     --- Building for trusty amd64 ---
     Stopping target if it is up
@@ -407,20 +407,20 @@ and inputs.
 
 For example:
 ```bash
-URL=https://github.com/laanwj/marbellachain.git
+URL=https://github.com/laanwj/mchain.git
 COMMIT=2014_03_windows_unicode_path
-./bin/gbuild --commit marbellachain=${COMMIT} --url marbellachain=${URL} ../marbellachain/contrib/gitian-descriptors/gitian-linux.yml
-./bin/gbuild --commit marbellachain=${COMMIT} --url marbellachain=${URL} ../marbellachain/contrib/gitian-descriptors/gitian-win.yml
-./bin/gbuild --commit marbellachain=${COMMIT} --url marbellachain=${URL} ../marbellachain/contrib/gitian-descriptors/gitian-osx.yml
-# if wanting to use a different version of eth-cpp-marbellachain:
-./bin/gbuild --commit marbellachain=${COMMIT},cpp-eth-marbellachain=${ETHCOMMIT} --url marbellachain=${URL},cpp-eth-marbellachain=${ETHURL} ../marbellachain/contrib/gitian-descriptors/gitian-linux.yml
+./bin/gbuild --commit mchain=${COMMIT} --url mchain=${URL} ../mchain/contrib/gitian-descriptors/gitian-linux.yml
+./bin/gbuild --commit mchain=${COMMIT} --url mchain=${URL} ../mchain/contrib/gitian-descriptors/gitian-win.yml
+./bin/gbuild --commit mchain=${COMMIT} --url mchain=${URL} ../mchain/contrib/gitian-descriptors/gitian-osx.yml
+# if wanting to use a different version of eth-cpp-mchain:
+./bin/gbuild --commit mchain=${COMMIT},cpp-eth-mchain=${ETHCOMMIT} --url mchain=${URL},cpp-eth-mchain=${ETHURL} ../mchain/contrib/gitian-descriptors/gitian-linux.yml
 ```
 
 Building fully offline
 -----------------------
 
 For building fully offline including attaching signatures to unsigned builds, the detached-sigs repository
-and the marbellachain git repository with the desired tag must both be available locally, and then gbuild must be
+and the mchain git repository with the desired tag must both be available locally, and then gbuild must be
 told where to find them. It also requires an apt-cacher-ng which is fully-populated but set to offline mode, or
 manually disabling gitian-builder's use of apt-get to update the VM build environment.
 
@@ -439,7 +439,7 @@ cd /path/to/gitian-builder
 LXC_ARCH=amd64 LXC_SUITE=trusty on-target -u root apt-get update
 LXC_ARCH=amd64 LXC_SUITE=trusty on-target -u root \
   -e DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install \
-  $( sed -ne '/^packages:/,/[^-] .*/ {/^- .*/{s/"//g;s/- //;p}}' ../marbellachain/contrib/gitian-descriptors/*|sort|uniq )
+  $( sed -ne '/^packages:/,/[^-] .*/ {/^- .*/{s/"//g;s/- //;p}}' ../mchain/contrib/gitian-descriptors/*|sort|uniq )
 LXC_ARCH=amd64 LXC_SUITE=trusty on-target -u root apt-get -q -y purge grub
 LXC_ARCH=amd64 LXC_SUITE=trusty on-target -u root -e DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
 ```
@@ -459,12 +459,12 @@ Then when building, override the remote URLs that gbuild would otherwise pull fr
 ```bash
 
 cd /some/root/path/
-git clone https://github.com/marbellachain/marbellachain-detached-sigs.git
+git clone https://github.com/mchainnetwork/mchain-detached-sigs.git
 
-BTCPATH=/some/root/path/marbellachain
-SIGPATH=/some/root/path/marbellachain-detached-sigs
+BTCPATH=/some/root/path/mchain
+SIGPATH=/some/root/path/mchain-detached-sigs
 
-./bin/gbuild --url marbellachain=${BTCPATH},signature=${SIGPATH} ../marbellachain/contrib/gitian-descriptors/gitian-win-signer.yml
+./bin/gbuild --url mchain=${BTCPATH},signature=${SIGPATH} ../mchain/contrib/gitian-descriptors/gitian-win-signer.yml
 ```
 
 Signing externally
@@ -479,9 +479,9 @@ When you execute `gsign` you will get an error from GPG, which can be ignored. C
 in `gitian.sigs` to your signing machine and do
 
 ```bash
-    gpg --detach-sign ${VERSION}-linux/${SIGNER}/marbellachain-linux-build.assert
-    gpg --detach-sign ${VERSION}-win/${SIGNER}/marbellachain-win-build.assert
-    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/marbellachain-osx-build.assert
+    gpg --detach-sign ${VERSION}-linux/${SIGNER}/mchain-linux-build.assert
+    gpg --detach-sign ${VERSION}-win/${SIGNER}/mchain-win-build.assert
+    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/mchain-osx-build.assert
 ```
 
 This will create the `.sig` files that can be committed together with the `.assert` files to assert your
@@ -491,5 +491,5 @@ Uploading signatures
 ---------------------
 
 After building and signing you can push your signatures (both the `.assert` and `.assert.sig` files) to the
-[marbellachain/gitian.sigs](https://github.com/marbellachain/gitian.sigs/) repository, or if that's not possible create a pull
-request. You can also mail the files to Jordan Earls (earlz@marbellachain.org) and he will commit them.
+[mchain/gitian.sigs](https://github.com/mchain/gitian.sigs/) repository, or if that's not possible create a pull
+request. You can also mail the files to Jordan Earls (earlz@mchain.network) and he will commit them.

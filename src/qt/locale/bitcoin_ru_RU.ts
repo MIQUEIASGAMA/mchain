@@ -62,11 +62,11 @@
         <translation>Адреса получения</translation>
     </message>
     <message>
-        <source>These are your MarbellaChain addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Mchain addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Это ваши биткойн адреса для отправки платежа. Всегда проверяйте сумму и адрес получателя перед отправкой платежа.</translation>
     </message>
     <message>
-        <source>These are your MarbellaChain addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your Mchain addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Это ваши биткойн адреса для получения платежей. Настоятельно рекомендуем использовать новые адреса для получения каждой транзакции.</translation>
     </message>
     <message>
@@ -164,7 +164,7 @@
         <translation>Подтвердите шифрование бумажника</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MARBELLACHAINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MCHAINS&lt;/b&gt;!</source>
         <translation>Внимание: если вы зашифруете ваш кошелек и потеряете ваш пароль, то вы &lt;b&gt;ПОТЕРЯЕТЕ ВСЕ ВАШИ БИТКОЙНЫ&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -176,7 +176,7 @@
         <translation>Бумажник зашифрован</translation>
     </message>
     <message>
-        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your marbellachains from being stolen by malware infecting your computer.</source>
+        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your mcoins from being stolen by malware infecting your computer.</source>
         <translation>%1 закроется сейчас для завершения процесса шифрования. Запомните что шифрование вашего кошелька не сможет полностью защитить ваши биткойны от кражи при помощи вредоносного ПО, заразившего ваш компьютер.</translation>
     </message>
     <message>
@@ -306,7 +306,7 @@
         <translation>Реиндексация блоков на диске...</translation>
     </message>
     <message>
-        <source>Send coins to a MarbellaChain address</source>
+        <source>Send coins to a Mchain address</source>
         <translation>Послать средства на биткойн адрес</translation>
     </message>
     <message>
@@ -322,8 +322,8 @@
         <translation>&amp;Проверить сообщение...</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain Core</translation>
+        <source>Mchain</source>
+        <translation>Mchain Core</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -481,8 +481,8 @@
         <translation>Добро пожаловать в %1.</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain Core</translation>
+        <source>Mchain</source>
+        <translation>Mchain Core</translation>
     </message>
     <message>
         <source>Error</source>
@@ -542,8 +542,8 @@
         <translation>Пробросить порт через &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the MarbellaChain network through a SOCKS5 proxy.</source>
-        <translation>Подключится к сети MarbellaChain через SOCKS5 прокси.</translation>
+        <source>Connect to the Mchain network through a SOCKS5 proxy.</source>
+        <translation>Подключится к сети Mchain через SOCKS5 прокси.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -630,8 +630,8 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Enter a MarbellaChain address (e.g. %1)</source>
-        <translation>Введите MarbellaChain адрес (напр. %1)</translation>
+        <source>Enter a Mchain address (e.g. %1)</source>
+        <translation>Введите Mchain адрес (напр. %1)</translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -922,14 +922,14 @@
     </message>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
-        <source>MarbellaChain Core</source>
-        <translation>MarbellaChain Core</translation>
+        <source>Mchain Core</source>
+        <translation>Mchain Core</translation>
     </message>
     <message>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
-        <translation>marbellachain-core</translation>
+        <translation>mchain-core</translation>
     </message>
     <message>
         <source>Information</source>

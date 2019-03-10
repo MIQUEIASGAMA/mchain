@@ -114,8 +114,8 @@
         <translation>Recreans indicem frustorum in disco...</translation>
     </message>
     <message>
-        <source>Send coins to a MarbellaChain address</source>
-        <translation>Mitte nummos ad inscriptionem MarbellaChain</translation>
+        <source>Send coins to a Mchain address</source>
+        <translation>Mitte nummos ad inscriptionem Mchain</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -138,8 +138,8 @@
         <translation>&amp;Verifica nuntium...</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -166,12 +166,12 @@
         <translation>Cifra claves privatas quae cassidili tui sunt</translation>
     </message>
     <message>
-        <source>Sign messages with your MarbellaChain addresses to prove you own them</source>
-        <translation>Signa nuntios cum tuis inscriptionibus MarbellaChain ut demonstres te eas possidere</translation>
+        <source>Sign messages with your Mchain addresses to prove you own them</source>
+        <translation>Signa nuntios cum tuis inscriptionibus Mchain ut demonstres te eas possidere</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified MarbellaChain addresses</source>
-        <translation>Verifica nuntios ut certus sis eos signatos esse cum specificatis inscriptionibus MarbellaChain</translation>
+        <source>Verify messages to ensure they were signed with specified Mchain addresses</source>
+        <translation>Verifica nuntios ut certus sis eos signatos esse cum specificatis inscriptionibus Mchain</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -301,8 +301,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>Error</source>
@@ -350,8 +350,8 @@
         <translation>Cassidile</translation>
     </message>
     <message>
-        <source>Automatically open the MarbellaChain client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Aperi per se portam clientis MarbellaChain in itineratore.  Hoc tantum effectivum est si itineratrum tuum supportat UPnP et id activum est.</translation>
+        <source>Automatically open the Mchain client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Aperi per se portam clientis Mchain in itineratore.  Hoc tantum effectivum est si itineratrum tuum supportat UPnP et id activum est.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -433,8 +433,8 @@
         <translation>Schema</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the MarbellaChain network after a connection is established, but this process has not completed yet.</source>
-        <translation>Monstrata informatio fortasse non recentissima est.  Tuum cassidile per se synchronizat cum rete MarbellaChain postquam conexio constabilita est, sed hoc actio nondum perfecta est.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Mchain network after a connection is established, but this process has not completed yet.</source>
+        <translation>Monstrata informatio fortasse non recentissima est.  Tuum cassidile per se synchronizat cum rete Mchain postquam conexio constabilita est, sed hoc actio nondum perfecta est.</translation>
     </message>
     <message>
         <source>Immature:</source>
@@ -675,8 +675,8 @@
         <translation>Copia signationem in latibulum systematis</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this MarbellaChain address</source>
-        <translation>Signa nuntium ut demonstres hanc inscriptionem MarbellaChain a te possessa esse</translation>
+        <source>Sign the message to prove you own this Mchain address</source>
+        <translation>Signa nuntium ut demonstres hanc inscriptionem Mchain a te possessa esse</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -695,8 +695,8 @@
         <translation>&amp;Verifica Nuntium</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified MarbellaChain address</source>
-        <translation>Verifica nuntium ut cures signatum esse cum specifica inscriptione MarbellaChain</translation>
+        <source>Verify the message to ensure it was signed with the specified Mchain address</source>
+        <translation>Verifica nuntium ut cures signatum esse cum specifica inscriptione Mchain</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -746,7 +746,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Options:</source>
         <translation>Optiones:</translation>
@@ -772,8 +772,8 @@
         <translation>Operare infere sicut daemon et mandata accipe</translation>
     </message>
     <message>
-        <source>MarbellaChain Core</source>
-        <translation>MarbellaChain Nucleus</translation>
+        <source>Mchain Core</source>
+        <translation>Mchain Nucleus</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

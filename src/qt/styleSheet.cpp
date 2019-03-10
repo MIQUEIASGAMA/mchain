@@ -16,7 +16,7 @@
 static const QString STYLE_FORMAT = ":/styles/%1";
 static const QColor LINK_COLOR = "#2d9ad0";
 
-class MarbellaChainStyle : public QProxyStyle
+class MchainStyle : public QProxyStyle
 {
 public:
 
@@ -98,9 +98,9 @@ void StyleSheet::setStyleSheet(QWidget *widget, const QString &style_name)
 void StyleSheet::setStyleSheet(QApplication *app, const QString& style_name)
 {
     QStyle* mainStyle = QStyleFactory::create("fusion");
-    MarbellaChainStyle* marbellachainStyle = new MarbellaChainStyle;
-    marbellachainStyle->setBaseStyle(mainStyle);
-    app->setStyle(marbellachainStyle);
+    MchainStyle* mchainStyle = new MchainStyle;
+    mchainStyle->setBaseStyle(mainStyle);
+    app->setStyle(mchainStyle);
 
     QPalette mainPalette(app->palette());
     mainPalette.setColor(QPalette::Link, LINK_COLOR);

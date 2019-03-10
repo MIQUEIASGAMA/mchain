@@ -54,10 +54,10 @@ static int AppInitRawTx(int argc, char* argv[])
     if (argc<2 || gArgs.IsArgSet("-?") || gArgs.IsArgSet("-h") || gArgs.IsArgSet("-help"))
     {
         // First part of help message is specific to this utility
-        std::string strUsage = strprintf(_("%s marbellachain-tx utility version"), _(PACKAGE_NAME)) + " " + FormatFullVersion() + "\n\n" +
+        std::string strUsage = strprintf(_("%s mchain-tx utility version"), _(PACKAGE_NAME)) + " " + FormatFullVersion() + "\n\n" +
             _("Usage:") + "\n" +
-              "  marbellachain-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded marbellachain transaction") + "\n" +
-              "  marbellachain-tx [options] -create [commands]   " + _("Create hex-encoded marbellachain transaction") + "\n" +
+              "  mchain-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded mchain transaction") + "\n" +
+              "  mchain-tx [options] -create [commands]   " + _("Create hex-encoded mchain transaction") + "\n" +
               "\n";
 
         fprintf(stdout, "%s", strUsage.c_str());

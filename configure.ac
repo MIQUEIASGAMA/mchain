@@ -7,17 +7,17 @@ define(_CLIENT_VERSION_BUILD, 0)
 define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2018)
 define(_COPYRIGHT_HOLDERS,[The %s developers])
-define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[MarbellaChain Core]])
-AC_INIT([MarbellaChain Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/marbellachain/marbellachain/issues],[marbellachain],[https://marbellachain.org/])
+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Mchain Core]])
+AC_INIT([Mchain Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/mchainnetwork/mchain/issues],[mchain],[https://mchain.network/])
 AC_CONFIG_SRCDIR([src/validation.cpp])
 AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-BITCOIN_DAEMON_NAME=marbellachaind
-BITCOIN_GUI_NAME=marbellachain-qt
-BITCOIN_CLI_NAME=marbellachain-cli
-BITCOIN_TX_NAME=marbellachain-tx
+BITCOIN_DAEMON_NAME=mchaind
+BITCOIN_GUI_NAME=mchain-qt
+BITCOIN_CLI_NAME=mchain-cli
+BITCOIN_TX_NAME=mchain-tx
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
@@ -238,7 +238,7 @@ if test "x$enable_debug" = xyes; then
     fi
 fi
 
-CPPFLAGS="$CPPFLAGS -DMARBELLACHAIN_BUILD"
+CPPFLAGS="$CPPFLAGS -DMCHAIN_BUILD"
 
 ERROR_CXXFLAGS=
 if test "x$enable_werror" = "xyes"; then

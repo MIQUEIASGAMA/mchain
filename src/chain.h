@@ -215,14 +215,14 @@ public:
     uint32_t nTime;
     uint32_t nBits;
     uint32_t nNonce;
-    uint256 hashStateRoot; // marbellachain
-    uint256 hashUTXORoot; // marbellachain
+    uint256 hashStateRoot; // mchain
+    uint256 hashUTXORoot; // mchain
     // block signature - proof-of-stake protect the block by signing the block using a stake holder private key
     std::vector<unsigned char> vchBlockSig;
     uint256 nStakeModifier;
     // proof-of-stake specific fields
     COutPoint prevoutStake;
-    uint256 hashProof; // marbellachain
+    uint256 hashProof; // mchain
     uint64_t nMoneySupply;
 
     //! (memory only) Sequential id assigned to distinguish order in which blocks are received.
@@ -253,8 +253,8 @@ public:
         nTime          = 0;
         nBits          = 0;
         nNonce         = 0;
-        hashStateRoot  = uint256(); // marbellachain
-        hashUTXORoot   = uint256(); // marbellachain
+        hashStateRoot  = uint256(); // mchain
+        hashUTXORoot   = uint256(); // mchain
         vchBlockSig.clear();
         nStakeModifier = uint256();
         hashProof = uint256();
@@ -277,12 +277,12 @@ public:
         nBits          = block.nBits;
         nNonce         = block.nNonce;
         nMoneySupply   = 0;
-        hashStateRoot  = block.hashStateRoot; // marbellachain
-        hashUTXORoot   = block.hashUTXORoot; // marbellachain
+        hashStateRoot  = block.hashStateRoot; // mchain
+        hashUTXORoot   = block.hashUTXORoot; // mchain
         nStakeModifier = uint256();
         hashProof = uint256(); 
-        prevoutStake   = block.prevoutStake; // marbellachain
-        vchBlockSig    = block.vchBlockSig; // marbellachain
+        prevoutStake   = block.prevoutStake; // mchain
+        vchBlockSig    = block.vchBlockSig; // mchain
     }
 
     CDiskBlockPos GetBlockPos() const {
@@ -313,8 +313,8 @@ public:
         block.nTime          = nTime;
         block.nBits          = nBits;
         block.nNonce         = nNonce;
-        block.hashStateRoot  = hashStateRoot; // marbellachain
-        block.hashUTXORoot   = hashUTXORoot; // marbellachain
+        block.hashStateRoot  = hashStateRoot; // mchain
+        block.hashUTXORoot   = hashUTXORoot; // mchain
         block.vchBlockSig    = vchBlockSig;
         block.prevoutStake   = prevoutStake;
         return block;
@@ -351,7 +351,7 @@ public:
         return pbegin[(pend - pbegin)/2];
     }
 
-    bool IsProofOfWork() const // marbellachain
+    bool IsProofOfWork() const // mchain
     {
         return !IsProofOfStake();
     }
@@ -447,12 +447,12 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
-        READWRITE(hashStateRoot); // marbellachain
-        READWRITE(hashUTXORoot); // marbellachain
+        READWRITE(hashStateRoot); // mchain
+        READWRITE(hashUTXORoot); // mchain
         READWRITE(nStakeModifier);
         READWRITE(prevoutStake);
         READWRITE(hashProof);
-        READWRITE(vchBlockSig); // marbellachain
+        READWRITE(vchBlockSig); // mchain
     }
 
     uint256 GetBlockHash() const
@@ -464,8 +464,8 @@ public:
         block.nTime           = nTime;
         block.nBits           = nBits;
         block.nNonce          = nNonce;
-        block.hashStateRoot   = hashStateRoot; // marbellachain
-        block.hashUTXORoot    = hashUTXORoot; // marbellachain
+        block.hashStateRoot   = hashStateRoot; // mchain
+        block.hashUTXORoot    = hashUTXORoot; // mchain
         block.vchBlockSig     = vchBlockSig;
         block.prevoutStake    = prevoutStake;
         return block.GetHash();

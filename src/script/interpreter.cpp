@@ -1028,7 +1028,7 @@ bool EvalScript(std::vector<std::vector<unsigned char> >& stack, const CScript& 
                 }
                 break;
 
-                //////////////////////////////////////////////////////// marbellachain
+                //////////////////////////////////////////////////////// mchain
                 case OP_SPEND:
                 {
                     return true; // temp

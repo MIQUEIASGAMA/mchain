@@ -49,7 +49,7 @@ from test_framework.mininode import ToHex, CTransaction, network_thread_start
 from test_framework.blocktools import create_coinbase, create_block
 from test_framework.comptool import TestInstance, TestManager
 from test_framework.script import *
-from test_framework.marbellachainconfig import INITIAL_BLOCK_REWARD
+from test_framework.mchainconfig import INITIAL_BLOCK_REWARD
 from io import BytesIO
 import time
 

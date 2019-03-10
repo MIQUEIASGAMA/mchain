@@ -62,12 +62,12 @@
         <translation>A receber endereços</translation>
     </message>
     <message>
-        <source>These are your MarbellaChain addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estes são os seus endereços MarbellaChain para enviar pagamentos. Verifique sempre o valor e o endereço de envio antes de enviar moedas.</translation>
+        <source>These are your Mchain addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Estes são os seus endereços Mchain para enviar pagamentos. Verifique sempre o valor e o endereço de envio antes de enviar moedas.</translation>
     </message>
     <message>
-        <source>These are your MarbellaChain addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Estes são os seus endereços MarbellaChain para receber pagamentos. É recomendado que utilize um endereço novo para cada transacção.</translation>
+        <source>These are your Mchain addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Estes são os seus endereços Mchain para receber pagamentos. É recomendado que utilize um endereço novo para cada transacção.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -172,8 +172,8 @@
         <translation>Confirmar encriptação da carteira</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MARBELLACHAINS&lt;/b&gt;!</source>
-        <translation>Aviso: se encriptar a sua carteira e perder a sua frase de segurnça, &lt;b&gt;PERDERÁ TODOS OS SEUS MARBELLACHAINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MCHAINS&lt;/b&gt;!</source>
+        <translation>Aviso: se encriptar a sua carteira e perder a sua frase de segurnça, &lt;b&gt;PERDERÁ TODOS OS SEUS MCHAINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -184,8 +184,8 @@
         <translation>Carteira encriptada</translation>
     </message>
     <message>
-        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your marbellachains from being stolen by malware infecting your computer.</source>
-        <translation>%1 irá agora ser fechado para terminar o processo de encriptação. Recorde que a encriptação da sua carteira não protegerá totalmente os seus marbellachains de serem roubados por programas maliciosos que infectem o seu computador.</translation>
+        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your mcoins from being stolen by malware infecting your computer.</source>
+        <translation>%1 irá agora ser fechado para terminar o processo de encriptação. Recorde que a encriptação da sua carteira não protegerá totalmente os seus mcoins de serem roubados por programas maliciosos que infectem o seu computador.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -342,8 +342,8 @@
         <translation>A reindexar os blocos no disco...</translation>
     </message>
     <message>
-        <source>Send coins to a MarbellaChain address</source>
-        <translation>Enviar moedas para um endereço MarbellaChain</translation>
+        <source>Send coins to a Mchain address</source>
+        <translation>Enviar moedas para um endereço Mchain</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -366,8 +366,8 @@
         <translation>&amp;Verificar mensagem...</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -394,12 +394,12 @@
         <translation>Encriptar as chaves privadas que pertencem à sua carteira</translation>
     </message>
     <message>
-        <source>Sign messages with your MarbellaChain addresses to prove you own them</source>
-        <translation>Assine as mensagens com os seus endereços MarbellaChain para provar que é o proprietário dos mesmos</translation>
+        <source>Sign messages with your Mchain addresses to prove you own them</source>
+        <translation>Assine as mensagens com os seus endereços Mchain para provar que é o proprietário dos mesmos</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified MarbellaChain addresses</source>
-        <translation>Verifique mensagens para assegurar que foram assinadas com o endereço MarbellaChain especificado</translation>
+        <source>Verify messages to ensure they were signed with specified Mchain addresses</source>
+        <translation>Verifique mensagens para assegurar que foram assinadas com o endereço Mchain especificado</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -418,8 +418,8 @@
         <translation>Barra de ferramentas dos separadores</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and marbellachain: URIs)</source>
-        <translation>Solicitar pagamentos (gera códigos QR e marbellachain: URIs)</translation>
+        <source>Request payments (generates QR codes and mchain: URIs)</source>
+        <translation>Solicitar pagamentos (gera códigos QR e mchain: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -430,16 +430,16 @@
         <translation>Mostrar a lista de rótulos e endereços de receção usados</translation>
     </message>
     <message>
-        <source>Open a marbellachain: URI or payment request</source>
-        <translation>Abrir URI marbellachain: ou pedido de pagamento</translation>
+        <source>Open a mchain: URI or payment request</source>
+        <translation>Abrir URI mchain: ou pedido de pagamento</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Opções da linha de &amp;comando</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to MarbellaChain network</source>
-        <translation><numerusform>%n ligação ativa à rede MarbellaChain</numerusform><numerusform>%n ligações ativas à rede MarbellaChain</numerusform></translation>
+        <source>%n active connection(s) to Mchain network</source>
+        <translation><numerusform>%n ligação ativa à rede Mchain</numerusform><numerusform>%n ligações ativas à rede Mchain</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -482,7 +482,7 @@
         <translation>Atualizado</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible MarbellaChain command-line options</source>
+        <source>Show the %1 help message to get a list with possible Mchain command-line options</source>
         <translation>Mostrar a mensagem de ajuda %1 para obter uma lista com possíveis opções a usar na linha de comandos.</translation>
     </message>
     <message>
@@ -552,8 +552,8 @@
         <translation>A carteira está &lt;b&gt;encriptada&lt;/b&gt; e atualmente &lt;b&gt;bloqueada&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. MarbellaChain can no longer continue safely and will quit.</source>
-        <translation>Ocorreu um erro fatal. O MarbellaChain não pode continuar com segurança e irá fechar.</translation>
+        <source>A fatal error occurred. Mchain can no longer continue safely and will quit.</source>
+        <translation>Ocorreu um erro fatal. O Mchain não pode continuar com segurança e irá fechar.</translation>
     </message>
 </context>
 <context>
@@ -746,8 +746,8 @@
         <translation>Editar o endereço de envio</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid MarbellaChain address.</source>
-        <translation>O endereço introduzido "%1" não é um endereço marbellachain válido.</translation>
+        <source>The entered address "%1" is not a valid Mchain address.</source>
+        <translation>O endereço introduzido "%1" não é um endereço mchain válido.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -859,8 +859,8 @@
         <translation>Utilizar uma pasta de dados personalizada:</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>Approximately %1 GB of data will be stored in this directory.</source>
@@ -894,12 +894,12 @@
         <translation>Formulário</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the marbellachain network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the mchain network, as detailed below.</source>
         <translation>Transações recentes podem não ser visíveis por agora, portanto o saldo da sua carteira pode estar incorreto. Esta informação será corrigida quando a sua carteira acabar de sincronizar com a rede, como está explicado em baixo.</translation>
     </message>
     <message>
-        <source>Attempting to spend marbellachains that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Tentar enviar marbellachains que estão afetadas por transações ainda não exibidas não será aceite pela rede.</translation>
+        <source>Attempting to spend mcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Tentar enviar mcoins que estão afetadas por transações ainda não exibidas não será aceite pela rede.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1053,8 +1053,8 @@
         <translation>&amp;Gastar troco não confirmado</translation>
     </message>
     <message>
-        <source>Automatically open the MarbellaChain client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir a porta do cliente marbellachain automaticamente no seu router. Isto apenas funciona se o seu router suportar UPnP e este se encontrar ligado.</translation>
+        <source>Automatically open the Mchain client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir a porta do cliente mchain automaticamente no seu router. Isto apenas funciona se o seu router suportar UPnP e este se encontrar ligado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1069,8 +1069,8 @@
         <translation>Permitir ligações de "a receber"</translation>
     </message>
     <message>
-        <source>Connect to the MarbellaChain network through a SOCKS5 proxy.</source>
-        <translation>Conectar à rede da MarbellaChain através dum proxy SOCLS5.</translation>
+        <source>Connect to the Mchain network through a SOCKS5 proxy.</source>
+        <translation>Conectar à rede da Mchain através dum proxy SOCLS5.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1105,8 +1105,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the MarbellaChain network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Ligar à rede MarbellaChain através de um proxy SOCKS5 separado para utilizar os serviços ocultos do Tor.</translation>
+        <source>Connect to the Mchain network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Ligar à rede Mchain através de um proxy SOCKS5 separado para utilizar os serviços ocultos do Tor.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1208,8 +1208,8 @@
         <translation>Formulário</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the MarbellaChain network after a connection is established, but this process has not completed yet.</source>
-        <translation>A informação mostrada poderá estar desatualizada. A sua carteira sincroniza automaticamente com a rede MarbellaChain depois de estabelecer ligação, mas este processo ainda não está completo.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Mchain network after a connection is established, but this process has not completed yet.</source>
+        <translation>A informação mostrada poderá estar desatualizada. A sua carteira sincroniza automaticamente com a rede Mchain depois de estabelecer ligação, mas este processo ainda não está completo.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1283,8 +1283,8 @@
         <translation>Erro do pedido de pagamento</translation>
     </message>
     <message>
-        <source>Cannot start marbellachain: click-to-pay handler</source>
-        <translation>Impossível iniciar o controlador de marbellachain: click-to-pay</translation>
+        <source>Cannot start mchain: click-to-pay handler</source>
+        <translation>Impossível iniciar o controlador de mchain: click-to-pay</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1299,8 +1299,8 @@
         <translation>Endereço de pagamento inválido %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid MarbellaChain address or malformed URI parameters.</source>
-        <translation>URI não foi lido correctamente! Isto pode ser causado por um endereço MarbellaChain inválido ou por parâmetros URI malformados.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Mchain address or malformed URI parameters.</source>
+        <translation>URI não foi lido correctamente! Isto pode ser causado por um endereço Mchain inválido ou por parâmetros URI malformados.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1401,8 +1401,8 @@
         <translation>Quantia</translation>
     </message>
     <message>
-        <source>Enter a MarbellaChain address (e.g. %1)</source>
-        <translation>Entre um endereço MarbellaChain (ex. %1)</translation>
+        <source>Enter a Mchain address (e.g. %1)</source>
+        <translation>Entre um endereço Mchain (ex. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1809,8 +1809,8 @@
         <translation>&amp;Mensagem:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the MarbellaChain network.</source>
-        <translation>Uma mensagem opcional para anexar ao pedido de pagamento, que será exibida quando o pedido for aberto. Nota: A mensagem não será enviada com o pagamento através da rede MarbellaChain.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Mchain network.</source>
+        <translation>Uma mensagem opcional para anexar ao pedido de pagamento, que será exibida quando o pedido for aberto. Nota: A mensagem não será enviada com o pagamento através da rede Mchain.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2042,7 +2042,7 @@
         <translation>Esconder</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for marbellachain transactions than the network can process.</source>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for mchain transactions than the network can process.</source>
         <translation>Pode pagar somente a taxa minima desde que haja um volume de transações inferior ao espaço nos blocos. No entanto tenha em atenção que esta opção poderá acabar em uma transação nunca confirmada assim que os pedidos de transações excedam a capacidade de processamento da rede.</translation>
     </message>
     <message>
@@ -2191,8 +2191,8 @@
         <translation>Pague apenas a taxa obrigatória de %1</translation>
     </message>
     <message>
-        <source>Warning: Invalid MarbellaChain address</source>
-        <translation>Aviso: endereço MarbellaChain inválido</translation>
+        <source>Warning: Invalid Mchain address</source>
+        <translation>Aviso: endereço Mchain inválido</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2234,8 +2234,8 @@
         <translation>Este é um pagamento normal.</translation>
     </message>
     <message>
-        <source>The MarbellaChain address to send the payment to</source>
-        <translation>O endereço MarbellaChain para enviar o pagamento</translation>
+        <source>The Mchain address to send the payment to</source>
+        <translation>O endereço Mchain para enviar o pagamento</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2254,8 +2254,8 @@
         <translation>Remover esta entrada</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less marbellachains than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>A taxa será deduzida ao valor que está a ser enviado. O destinatário irá receber menos marbellachains do que as que inseridas no campo do valor. Se estiverem selecionados múltiplos destinatários, a taxa será repartida equitativamente.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less mcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>A taxa será deduzida ao valor que está a ser enviado. O destinatário irá receber menos mcoins do que as que inseridas no campo do valor. Se estiverem selecionados múltiplos destinatários, a taxa será repartida equitativamente.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2282,8 +2282,8 @@
         <translation>Introduza um rótulo para este endereço para o adicionar à sua lista de endereços usados</translation>
     </message>
     <message>
-        <source>A message that was attached to the marbellachain: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the MarbellaChain network.</source>
-        <translation>Uma mensagem que estava anexada ao URI marbellachain: que será armazenada com a transação para sua referência. Nota: Esta mensagem não será enviada através da rede MarbellaChain.</translation>
+        <source>A message that was attached to the mchain: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Mchain network.</source>
+        <translation>Uma mensagem que estava anexada ao URI mchain: que será armazenada com a transação para sua referência. Nota: Esta mensagem não será enviada através da rede Mchain.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2327,12 +2327,12 @@
         <translation>&amp;Assinar Mensagem</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive marbellachains sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <source>You can sign messages/agreements with your addresses to prove you can receive mcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation>Pode assinar mensagens com os seus endereços para provar que são seus. Tenha atenção ao assinar mensagens ambíguas, pois ataques de phishing podem tentar enganá-lo de modo a assinar a sua identidade para os atacantes. Apenas assine declarações detalhadas com as quais concorde.</translation>
     </message>
     <message>
-        <source>The MarbellaChain address to sign the message with</source>
-        <translation>O endereço MarbellaChain para designar a mensagem</translation>
+        <source>The Mchain address to sign the message with</source>
+        <translation>O endereço Mchain para designar a mensagem</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2363,8 +2363,8 @@
         <translation>Copiar a assinatura actual para a área de transferência</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this MarbellaChain address</source>
-        <translation>Assine uma mensagem para provar que é dono deste endereço MarbellaChain</translation>
+        <source>Sign the message to prove you own this Mchain address</source>
+        <translation>Assine uma mensagem para provar que é dono deste endereço Mchain</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2387,12 +2387,12 @@
         <translation>Introduza o endereço de assinatura, mensagem (assegure-se que copia quebras de linha, espaços, tabulações, etc. exactamente) e assinatura abaixo para verificar a mensagem. Tenha atenção para não ler mais na assinatura do que o que estiver na mensagem assinada, para evitar ser enganado por um atacante que se encontre entre si e quem assinou a mensagem.</translation>
     </message>
     <message>
-        <source>The MarbellaChain address the message was signed with</source>
-        <translation>O endereço MarbellaChain com que a mensagem foi designada</translation>
+        <source>The Mchain address the message was signed with</source>
+        <translation>O endereço Mchain com que a mensagem foi designada</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified MarbellaChain address</source>
-        <translation>Verifique a mensagem para assegurar que foi assinada com o endereço MarbellaChain especificado</translation>
+        <source>Verify the message to ensure it was signed with the specified Mchain address</source>
+        <translation>Verifique a mensagem para assegurar que foi assinada com o endereço Mchain especificado</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2950,7 +2950,7 @@
     </message>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Options:</source>
         <translation>Opções:</translation>
@@ -3008,8 +3008,8 @@
         <translation>Não é possível iniciar o servidor HTTP. Verifique o debug.log para detalhes.</translation>
     </message>
     <message>
-        <source>MarbellaChain Core</source>
-        <translation>MarbellaChain Core</translation>
+        <source>Mchain Core</source>
+        <translation>Mchain Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

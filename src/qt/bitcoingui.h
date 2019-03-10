@@ -32,7 +32,7 @@ class HelpMessageDialog;
 class ModalOverlay;
 class TitleBar;
 class NavigationBar;
-class MarbellaChainVersionChecker;
+class MchainVersionChecker;
 class CWallet;
 
 QT_BEGIN_NAMESPACE
@@ -139,7 +139,7 @@ private:
     RPCConsole *rpcConsole;
     HelpMessageDialog *helpMessageDialog;
     ModalOverlay *modalOverlay;
-    MarbellaChainVersionChecker *marbellachainVersionChecker;
+    MchainVersionChecker *mchainVersionChecker;
     ModalOverlay *modalBackupOverlay;
 
     /** Keep track of previous number of blocks, to detect progress */

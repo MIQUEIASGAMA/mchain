@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Bitcoin Core
+Comment=Connect to the Mchain P2P Network
+Exec=mchain-qt %u
+Terminal=false
+Type=Application
+Icon=mchain128
+MimeType=x-scheme-handler/mchain;
+Categories=Office;Finance;
+StartupWMClass=Mchain-qt
+Name[en_US]=mchain-qt

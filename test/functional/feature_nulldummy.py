@@ -18,7 +18,7 @@ from test_framework.util import *
 from test_framework.mininode import CTransaction, network_thread_start
 from test_framework.blocktools import create_coinbase, create_block, add_witness_commitment
 from test_framework.script import CScript
-from test_framework.marbellachainconfig import COINBASE_MATURITY, INITIAL_BLOCK_REWARD
+from test_framework.mchainconfig import COINBASE_MATURITY, INITIAL_BLOCK_REWARD
 from io import BytesIO
 import time
 

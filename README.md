@@ -1,54 +1,54 @@
-What is MarbellaChain?
+What is Mchain?
 -------------
 
-MarbellaChain is a decentralized blockchain project built on Bitcoin's UTXO model, with support for Ethereum Virtual Machine based smart contracts, and secured by a proof of stake consensus model. It achieves this through the revolutionary Account Abstraction Layer which allows the EVM to communicate with MarbellaChain's Bitcoin-like UTXO blockchain. For more general information about MarbellaChain as well as links to join our community, go to https://marbellachain.org
+Mchain is a decentralized blockchain project built on Bitcoin's UTXO model, with support for Ethereum Virtual Machine based smart contracts, and secured by a proof of stake consensus model. It achieves this through the revolutionary Account Abstraction Layer which allows the EVM to communicate with Mchain's Bitcoin-like UTXO blockchain. For more general information about Mchain as well as links to join our community, go to https://mchain.network
 
-Welcome to the MarbellaChain Ignition Main Network. This is the main network where the tokens hold value and should be guarded very carefully. If you are testing the network, or developing unstable software on MarbellaChain, we highly recommend using either testnet or regtest mode. 
+Welcome to the Mchain Ignition Main Network. This is the main network where the tokens hold value and should be guarded very carefully. If you are testing the network, or developing unstable software on Mchain, we highly recommend using either testnet or regtest mode. 
 
-The major features of the MarbellaChain network include:
+The major features of the Mchain network include:
 
-1. Compatibility with the Ethereum Virtual Machine, which allows for compatibility with most existing Solidity based smart contracts. No special solidity compiler is required to deploy your smart contract to MarbellaChain. 
-2. A Proof of Stake consensus system which is optimized for MarbellaChain's contract model. Any user can stake and help to secure the network. There is no voting, master nodes, or minimum amount required.
+1. Compatibility with the Ethereum Virtual Machine, which allows for compatibility with most existing Solidity based smart contracts. No special solidity compiler is required to deploy your smart contract to Mchain. 
+2. A Proof of Stake consensus system which is optimized for Mchain's contract model. Any user can stake and help to secure the network. There is no voting, master nodes, or minimum amount required.
 3. The Decentralized Governance Protocol is completely implemented and functional, which allows certain network parameters to be modified without a fork or other network disruption. This currently controls parameters like block size, gas prices, etc. 
-4. Uses the UTXO transaction model and is compatible with Bitcoin, allowing for existing tooling and workflows to be used with MarbellaChain. This allows for the infamous SPV protocol to be used which is ideal for light wallets on mobile phones and IoT devices.
+4. Uses the UTXO transaction model and is compatible with Bitcoin, allowing for existing tooling and workflows to be used with Mchain. This allows for the infamous SPV protocol to be used which is ideal for light wallets on mobile phones and IoT devices.
 
-Note: MarbellaChain Core is considered beta software. We make no warranties or guarantees of its security or stability.
+Note: Mchain Core is considered beta software. We make no warranties or guarantees of its security or stability.
 
-MarbellaChain Documentation and Usage Resources
+Mchain Documentation and Usage Resources
 ---------------
 
-These are some resources that might be helpful in understanding MarbellaChain. Note that the unofficial documents are not created by the MarbellaChain team.
+These are some resources that might be helpful in understanding Mchain. Note that the unofficial documents are not created by the Mchain team.
 
 Basic usage resources:
 
-* [Block explorer](https://explorer.marbellachain.org)
+* [Block explorer](https://explorer.mchain.network)
 
-General Info about MarbellaChain:
+General Info about Mchain:
 
-* [MarbellaChain Website](https://marbellachain.org/)
+* [Mchain Website](https://mchain.network/)
 
-What is MarbellaChain Core?
+What is Mchain Core?
 ------------------
 
-MarbellaChain Core is our primary mainnet wallet. It implements a full node and is capable of storing, validating, and distributing all history of the MarbellaChain network. MarbellaChain Core is considered the reference implementation for the MarbellaChain network. 
+Mchain Core is our primary mainnet wallet. It implements a full node and is capable of storing, validating, and distributing all history of the Mchain network. Mchain Core is considered the reference implementation for the Mchain network. 
 
-MarbellaChain Core currently implements the following:
+Mchain Core currently implements the following:
 
-* Sending/Receiving MarbellaChain
-* Sending/Receiving ERC20 tokens on the MarbellaChain network
-* Staking and creating blocks for the MarbellaChain network
+* Sending/Receiving Mchain
+* Sending/Receiving ERC20 tokens on the Mchain network
+* Staking and creating blocks for the Mchain network
 * Creating and interacting with smart contracts
 * Running a full node for distributing the blockchain to other users
 * "Prune" mode, which minimizes disk usage
-* Regtest mode, which enables developers to very quickly build their own private MarbellaChain network for Dapp testing
+* Regtest mode, which enables developers to very quickly build their own private Mchain network for Dapp testing
 * Compatibility with the Bitcoin Core set of RPC commands and APIs
 
-Building MarbellaChain Core
+Building Mchain Core
 ----------
 
 ### Build on Ubuntu
 
-    This is a quick start script for compiling MarbellaChain on  Ubuntu
+    This is a quick start script for compiling Mchain on  Ubuntu
 
 
     sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev
@@ -60,8 +60,8 @@ Building MarbellaChain Core
     # If you want to build the Qt GUI:
     sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler qrencode
 
-    git clone https://github.com/marbellachain/marbellachain --recursive
-    cd marbellachain
+    git clone https://github.com/mchainnetwork/mchain --recursive
+    cd mchain
 
     # Note autogen will prompt to install some more dependencies if needed
     ./autogen.sh
@@ -70,7 +70,7 @@ Building MarbellaChain Core
     
 ### Build on CentOS
 
-Here is a brief description for compiling MarbellaChain on CentOS, for more details please refer to [the specific document](https://github.com/marbellachain/marbellachain/blob/master/doc/build-unix.md)
+Here is a brief description for compiling Mchain on CentOS, for more details please refer to [the specific document](https://github.com/mchainnetwork/mchain/blob/master/doc/build-unix.md)
 
     # Compiling boost manually
     sudo yum install python-devel bzip2-devel
@@ -82,16 +82,16 @@ Here is a brief description for compiling MarbellaChain on CentOS, for more deta
     ./b2 headers
     sudo ./b2 -j4 install
     
-    # Installing Dependencies for MarbellaChain
+    # Installing Dependencies for Mchain
     sudo yum install epel-release
     sudo yum install libtool libdb4-cxx-devel openssl-devel libevent-devel
     
     # If you want to build the Qt GUI:
     sudo yum install qt5-qttools-devel protobuf-devel qrencode-devel
     
-    # Building MarbellaChain
-    git clone --recursive https://github.com/marbellachain/marbellachain.git
-    cd marbellachain
+    # Building Mchain
+    git clone --recursive https://github.com/mchainnetwork/mchain.git
+    cd mchain
     ./autogen.sh
     ./configure
     make -j4
@@ -117,16 +117,16 @@ Then install [Homebrew](https://brew.sh).
 
 NOTE: Building with Qt4 is still supported, however, could result in a broken UI. Building with Qt5 is recommended.
 
-#### Build MarbellaChain Core
+#### Build Mchain Core
 
-1. Clone the marbellachain source code and cd into `marbellachain`
+1. Clone the mchain source code and cd into `mchain`
 
-        git clone --recursive https://github.com/marbellachain/marbellachain.git
-        cd marbellachain
+        git clone --recursive https://github.com/mchainnetwork/mchain.git
+        cd mchain
 
-2.  Build marbellachain-core:
+2.  Build mchain-core:
 
-    Configure and build the headless marbellachain binaries as well as the GUI (if Qt is found).
+    Configure and build the headless mchain binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -140,26 +140,26 @@ NOTE: Building with Qt4 is still supported, however, could result in a broken UI
 
 ### Run
 
-Then you can either run the command-line daemon using `src/marbellachaind` and `src/marbellachain-cli`, or you can run the Qt GUI using `src/qt/marbellachain-qt`
+Then you can either run the command-line daemon using `src/mchaind` and `src/mchain-cli`, or you can run the Qt GUI using `src/qt/mchain-qt`
 
-For in-depth description of Sparknet and how to use MarbellaChain for interacting with contracts, please see [sparknet-guide](doc/sparknet-guide.md).
+For in-depth description of Sparknet and how to use Mchain for interacting with contracts, please see [sparknet-guide](doc/sparknet-guide.md).
 
 License
 -------
 
-MarbellaChain is GPLv3 licensed.
+Mchain is GPLv3 licensed.
 
 
 Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/marbellachain/marbellachain/tags) are created
-regularly to indicate new official, stable release versions of MarbellaChain.
+completely stable. [Tags](https://github.com/mchainnetwork/mchain/tags) are created
+regularly to indicate new official, stable release versions of Mchain.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Developer IRC can be found on Freenode at #marbellachain-dev.
+Developer IRC can be found on Freenode at #mchain-dev.
 
 
 Testing

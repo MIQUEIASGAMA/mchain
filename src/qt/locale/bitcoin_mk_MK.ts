@@ -138,7 +138,7 @@
         <translation>Повторно индексирање на блокови од дискот...</translation>
     </message>
     <message>
-        <source>Send coins to a MarbellaChain address</source>
+        <source>Send coins to a Mchain address</source>
         <translation>Испрати биткоини на Биткоин адреса</translation>
     </message>
     <message>
@@ -146,7 +146,7 @@
         <translation>&amp;Потврди порака...</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
+        <source>Mchain</source>
         <translation>Биткоин</translation>
     </message>
     <message>
@@ -299,7 +299,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>MarbellaChain</source>
+        <source>Mchain</source>
         <translation>Биткоин</translation>
     </message>
     <message>
@@ -584,13 +584,13 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Options:</source>
         <translation>Опции:</translation>
     </message>
     <message>
-        <source>MarbellaChain Core</source>
+        <source>Mchain Core</source>
         <translation>Биткоин Core</translation>
     </message>
     <message>

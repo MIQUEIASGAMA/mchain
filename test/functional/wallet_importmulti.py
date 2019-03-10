@@ -5,7 +5,7 @@
 """Test the importmulti RPC."""
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
-from test_framework.marbellachainconfig import COINBASE_MATURITY
+from test_framework.mchainconfig import COINBASE_MATURITY
 
 class ImportMultiTest (BitcoinTestFramework):
     def set_test_params(self):

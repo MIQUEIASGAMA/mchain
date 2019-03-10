@@ -223,18 +223,18 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
 
     }
 
-    //////////////////////////////////////////////////////// marbellachain
-    MarbellaChainDGP marbellachainDGP(globalState.get(), fGettingValuesDGP);
-    globalSealEngine->setMarbellaChainSchedule(marbellachainDGP.getGasSchedule(nHeight));
-    uint32_t blockSizeDGP = marbellachainDGP.getBlockSize(nHeight);
-    minGasPrice = marbellachainDGP.getMinGasPrice(nHeight);
+    //////////////////////////////////////////////////////// mchain
+    MchainDGP mchainDGP(globalState.get(), fGettingValuesDGP);
+    globalSealEngine->setMchainSchedule(mchainDGP.getGasSchedule(nHeight));
+    uint32_t blockSizeDGP = mchainDGP.getBlockSize(nHeight);
+    minGasPrice = mchainDGP.getMinGasPrice(nHeight);
     if(gArgs.IsArgSet("-staker-min-tx-gas-price")) {
         CAmount stakerMinGasPrice;
         if(ParseMoney(gArgs.GetArg("-staker-min-tx-gas-price", ""), stakerMinGasPrice)) {
             minGasPrice = std::max(minGasPrice, (uint64_t)stakerMinGasPrice);
         }
     }
-    hardBlockGasLimit = marbellachainDGP.getBlockGasLimit(nHeight);
+    hardBlockGasLimit = mchainDGP.getBlockGasLimit(nHeight);
     softBlockGasLimit = gArgs.GetArg("-staker-soft-block-gas-limit", hardBlockGasLimit);
     softBlockGasLimit = std::min(softBlockGasLimit, hardBlockGasLimit);
     txGasLimit = gArgs.GetArg("-staker-max-tx-gas-limit", softBlockGasLimit);
@@ -365,7 +365,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateEmptyBlock(const CScript& 
         pblock->prevoutStake.n=0;
     }
 
-    //////////////////////////////////////////////////////// marbellachain
+    //////////////////////////////////////////////////////// mchain
     //state shouldn't change here for an empty block, but if it's not valid it'll fail in CheckBlock later
     pblock->hashStateRoot = uint256(h256Touint(dev::h256(globalState->rootHash())));
     pblock->hashUTXORoot = uint256(h256Touint(dev::h256(globalState->rootHashUTXO())));
@@ -449,34 +449,34 @@ bool BlockAssembler::AttemptToAddContractToBlock(CTxMemPool::txiter iter, uint64
     uint64_t nBlockWeight = this->nBlockWeight;
     uint64_t nBlockSigOpsCost = this->nBlockSigOpsCost;
 
-    MarbellaChainTxConverter convert(iter->GetTx(), NULL, &pblock->vtx);
+    MchainTxConverter convert(iter->GetTx(), NULL, &pblock->vtx);
 
-    ExtractMarbellaChainTX resultConverter;
-    if(!convert.extractionMarbellaChainTransactions(resultConverter)){
+    ExtractMchainTX resultConverter;
+    if(!convert.extractionMchainTransactions(resultConverter)){
         //this check already happens when accepting txs into mempool
         //therefore, this can only be triggered by using raw transactions on the staker itself
         return false;
     }
-    std::vector<MarbellaChainTransaction> marbellachainTransactions = resultConverter.first;
+    std::vector<MchainTransaction> mchainTransactions = resultConverter.first;
     dev::u256 txGas = 0;
-    for(MarbellaChainTransaction marbellachainTransaction : marbellachainTransactions){
-        txGas += marbellachainTransaction.gas();
+    for(MchainTransaction mchainTransaction : mchainTransactions){
+        txGas += mchainTransaction.gas();
         if(txGas > txGasLimit) {
             // Limit the tx gas limit by the soft limit if such a limit has been specified.
             return false;
         }
 
-        if(bceResult.usedGas + marbellachainTransaction.gas() > softBlockGasLimit){
+        if(bceResult.usedGas + mchainTransaction.gas() > softBlockGasLimit){
             //if this transaction's gasLimit could cause block gas limit to be exceeded, then don't add it
             return false;
         }
-        if(marbellachainTransaction.gasPrice() < minGasPrice){
+        if(mchainTransaction.gasPrice() < minGasPrice){
             //if this transaction's gasPrice is less than the current DGP minGasPrice don't add it
             return false;
         }
     }
     // We need to pass the DGP's block gas limit (not the soft limit) since it is consensus critical.
-    ByteCodeExec exec(*pblock, marbellachainTransactions, hardBlockGasLimit);
+    ByteCodeExec exec(*pblock, mchainTransactions, hardBlockGasLimit);
     if(!exec.performByteCode()){
         //error, don't add contract
         globalState->setRoot(oldHashStateRoot);
@@ -884,7 +884,7 @@ void ThreadStakeMiner(CWallet *pwallet)
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
 
     // Make this thread recognisable as the mining thread
-    RenameThread("marbellachaincoin-miner");
+    RenameThread("mchaincoin-miner");
 
     CReserveKey reservekey(pwallet);
 
@@ -1009,7 +1009,7 @@ void ThreadStakeMiner(CWallet *pwallet)
     }
 }
 
-void StakeMarbellaChains(bool fStake, CWallet *pwallet)
+void StakeMchains(bool fStake, CWallet *pwallet)
 {
     static boost::thread_group* stakeThread = NULL;
 

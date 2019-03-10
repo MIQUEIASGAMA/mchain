@@ -72,12 +72,12 @@ struct TokenData
     {}
 };
 
-bool ToHash160(const std::string& strMarbellaChainAddress, std::string& strHash160)
+bool ToHash160(const std::string& strMchainAddress, std::string& strHash160)
 {
-    CTxDestination marbellachainAddress = DecodeDestination(strMarbellaChainAddress);
-    if(!IsValidDestination(marbellachainAddress))
+    CTxDestination mchainAddress = DecodeDestination(strMchainAddress);
+    if(!IsValidDestination(mchainAddress))
         return false;
-    const CKeyID * keyid = boost::get<CKeyID>(&marbellachainAddress);
+    const CKeyID * keyid = boost::get<CKeyID>(&mchainAddress);
     if(keyid){
         strHash160 = HexStr(valtype(keyid->begin(),keyid->end()));
     }else{
@@ -86,13 +86,13 @@ bool ToHash160(const std::string& strMarbellaChainAddress, std::string& strHash1
     return true;
 }
 
-bool ToMarbellaChainAddress(const std::string& strHash160, std::string& strMarbellaChainAddress)
+bool ToMchainAddress(const std::string& strHash160, std::string& strMchainAddress)
 {
     uint160 key(ParseHex(strHash160.c_str()));
     CKeyID keyid(key);
-    CTxDestination marbellachainAddress = keyid;
-    if(IsValidDestination(marbellachainAddress)){
-        strMarbellaChainAddress = EncodeDestination(marbellachainAddress);
+    CTxDestination mchainAddress = keyid;
+    if(IsValidDestination(mchainAddress)){
+        strMchainAddress = EncodeDestination(mchainAddress);
         return true;
     }
     return false;
@@ -636,9 +636,9 @@ bool Token::execEvents(int64_t fromBlock, int64_t toBlock, int func, std::vector
             TokenEvent tokenEvent;
             tokenEvent.address = variantMap.value("contractAddress").toString().toStdString();
             tokenEvent.sender = topicsList[1].toString().toStdString().substr(24);
-            ToMarbellaChainAddress(tokenEvent.sender, tokenEvent.sender);
+            ToMchainAddress(tokenEvent.sender, tokenEvent.sender);
             tokenEvent.receiver = topicsList[2].toString().toStdString().substr(24);
-            ToMarbellaChainAddress(tokenEvent.receiver, tokenEvent.receiver);
+            ToMchainAddress(tokenEvent.receiver, tokenEvent.receiver);
             tokenEvent.blockHash = uint256S(variantMap.value("blockHash").toString().toStdString());
             tokenEvent.blockNumber = variantMap.value("blockNumber").toLongLong();
             tokenEvent.transactionHash = uint256S(variantMap.value("transactionHash").toString().toStdString());

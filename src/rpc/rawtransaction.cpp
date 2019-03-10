@@ -83,7 +83,7 @@ UniValue gethexaddress(const JSONRPCRequest& request) {
 
     CTxDestination dest = DecodeDestination(request.params[0].get_str());
     if (!IsValidDestination(dest)) {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid MarbellaChain address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Mchain address");
     }
 
     const CKeyID *keyID = boost::get<CKeyID>(&dest);
@@ -177,7 +177,7 @@ UniValue getrawtransaction(const JSONRPCRequest& request)
             "         \"reqSigs\" : n,            (numeric) The required sigs\n"
             "         \"type\" : \"pubkeyhash\",  (string) The type, eg 'pubkeyhash'\n"
             "         \"addresses\" : [           (json array of string)\n"
-            "           \"address\"        (string) marbellachain address\n"
+            "           \"address\"        (string) mchain address\n"
             "           ,...\n"
             "         ]\n"
             "       }\n"
@@ -394,12 +394,12 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             "     ]\n"
             "2. \"outputs\"               (object, required) a json object with outputs\n"
             "    {\n"
-            "      \"address\": x.xxx,    (numeric or string, required) The key is the marbellachain address, the numeric value (can be string) is the " + CURRENCY_UNIT + " amount\n"
+            "      \"address\": x.xxx,    (numeric or string, required) The key is the mchain address, the numeric value (can be string) is the " + CURRENCY_UNIT + " amount\n"
             "      \"data\": \"hex\"      (string, required) The key is \"data\", the value is hex encoded data\n"
             "      \"contract\":{\n"
             "         \"contractAddress\":\"address\", (string, required) Valid contract address (valid hash160 hex data)\n"
             "         \"data\":\"hex\",                (string, required) Hex data to add in the call output\n"
-            "         \"amount\":x.xxx,                (numeric, optional) Value in MARBELLACHAIN to send with the call, should be a valid amount, default 0\n"
+            "         \"amount\":x.xxx,                (numeric, optional) Value in MCHAIN to send with the call, should be a valid amount, default 0\n"
             "         \"gasLimit\":x,                  (numeric, optional) The gas limit for the transaction\n"
             "         \"gasPrice\":x.xxx               (numeric, optional) The gas price for the transaction\n"
             "       } \n"
@@ -495,9 +495,9 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
 
             // Get dgp gas limit and gas price
             LOCK(cs_main);
-            MarbellaChainDGP marbellachainDGP(globalState.get(), fGettingValuesDGP);
-            uint64_t blockGasLimit = marbellachainDGP.getBlockGasLimit(chainActive.Height());
-            uint64_t minGasPrice = CAmount(marbellachainDGP.getMinGasPrice(chainActive.Height()));
+            MchainDGP mchainDGP(globalState.get(), fGettingValuesDGP);
+            uint64_t blockGasLimit = mchainDGP.getBlockGasLimit(chainActive.Height());
+            uint64_t minGasPrice = CAmount(mchainDGP.getMinGasPrice(chainActive.Height()));
             CAmount nGasPrice = (minGasPrice>DEFAULT_GAS_PRICE)?minGasPrice:DEFAULT_GAS_PRICE;
 
             // Get the contract address
@@ -563,7 +563,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         } else {
             CTxDestination destination = DecodeDestination(name_);
             if (!IsValidDestination(destination)) {
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid MarbellaChain address: ")+name_);
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Mchain address: ")+name_);
             }
 
             if (!destinations.insert(destination).second) {
@@ -628,7 +628,7 @@ UniValue decoderawtransaction(const JSONRPCRequest& request)
             "         \"reqSigs\" : n,            (numeric) The required sigs\n"
             "         \"type\" : \"pubkeyhash\",  (string) The type, eg 'pubkeyhash'\n"
             "         \"addresses\" : [           (json array of string)\n"
-            "           \"Q2tvKAXCxZjSmdNbao16dKXC8tRWfcF5oc\"   (string) marbellachain address\n"
+            "           \"Q2tvKAXCxZjSmdNbao16dKXC8tRWfcF5oc\"   (string) mchain address\n"
             "           ,...\n"
             "         ]\n"
             "       }\n"
@@ -675,7 +675,7 @@ UniValue decodescript(const JSONRPCRequest& request)
             "  \"type\":\"type\", (string) The output type\n"
             "  \"reqSigs\": n,    (numeric) The required signatures\n"
             "  \"addresses\": [   (json array of string)\n"
-            "     \"address\"     (string) marbellachain address\n"
+            "     \"address\"     (string) mchain address\n"
             "     ,...\n"
             "  ],\n"
             "  \"p2sh\",\"address\" (string) address of P2SH script wrapping this redeem script (not returned if the script is already a P2SH).\n"

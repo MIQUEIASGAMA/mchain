@@ -727,7 +727,7 @@ bool WalletModel::isSpent(const COutPoint& outpoint) const
     return wallet->IsSpent(outpoint.hash, outpoint.n);
 }
 
-bool WalletModel::isUnspentAddress(const std::string &marbellachainAddress) const
+bool WalletModel::isUnspentAddress(const std::string &mchainAddress) const
 {
     LOCK2(cs_main, wallet->cs_wallet);
 
@@ -739,7 +739,7 @@ bool WalletModel::isUnspentAddress(const std::string &marbellachainAddress) cons
         const CScript& scriptPubKey = out.tx->tx->vout[out.i].scriptPubKey;
         bool fValidAddress = ExtractDestination(scriptPubKey, address);
 
-        if(fValidAddress && EncodeDestination(address) == marbellachainAddress && out.tx->tx->vout[out.i].nValue)
+        if(fValidAddress && EncodeDestination(address) == mchainAddress && out.tx->tx->vout[out.i].nValue)
         {
             return true;
         }

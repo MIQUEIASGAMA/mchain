@@ -98,8 +98,8 @@
         <translation>Vhura &amp;URI</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -165,8 +165,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>MarbellaChain</source>
-        <translation>MarbellaChain</translation>
+        <source>Mchain</source>
+        <translation>Mchain</translation>
     </message>
     </context>
 <context>
@@ -194,8 +194,8 @@
         <translation>Marii </translation>
     </message>
     <message>
-        <source>Enter a MarbellaChain address (e.g. %1)</source>
-        <translation>Nyora kero ye MarbellaChain (sekuti %1)</translation>
+        <source>Enter a Mchain address (e.g. %1)</source>
+        <translation>Nyora kero ye Mchain (sekuti %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -350,7 +350,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Information</source>
         <translation>Ruzivo</translation>

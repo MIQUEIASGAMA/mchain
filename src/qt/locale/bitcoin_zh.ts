@@ -111,8 +111,8 @@
         <translation>仅支付全额的%1</translation>
     </message>
     <message>
-        <source>Warning: Invalid MarbellaChain address</source>
-        <translation>警告：MARBELLACHAIN地址无效</translation>
+        <source>Warning: Invalid Mchain address</source>
+        <translation>警告：MCHAIN地址无效</translation>
     </message>
     </context>
 <context>
@@ -170,7 +170,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Transaction too large for fee policy</source>
         <translation>根据费率标准，本次转账超额</translation>

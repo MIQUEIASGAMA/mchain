@@ -21,7 +21,7 @@
 #include <rpc/server.h>
 #include <qt/navigationbar.h>
 #include <qt/titlebar.h>
-#include <qt/marbellachainversionchecker.h>
+#include <qt/mchainversionchecker.h>
 
 #ifdef ENABLE_WALLET
 #include <qt/walletframe.h>
@@ -139,7 +139,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     rpcConsole(0),
     helpMessageDialog(0),
     modalOverlay(0),
-    marbellachainVersionChecker(0),
+    mchainVersionChecker(0),
     modalBackupOverlay(0),
     prevBlocks(0),
     spinnerFrame(0),
@@ -290,12 +290,12 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
 
     modalOverlay = new ModalOverlay(this->centralWidget());
     modalBackupOverlay = new ModalOverlay(this, ModalOverlay::Backup);
-    marbellachainVersionChecker = new MarbellaChainVersionChecker(this);
+    mchainVersionChecker = new MchainVersionChecker(this);
 
-    if(fCheckForUpdates && marbellachainVersionChecker->newVersionAvailable())
+    if(fCheckForUpdates && mchainVersionChecker->newVersionAvailable())
     {
-        QString link = QString("<a href=%1>%2</a>").arg(MARBELLACHAIN_RELEASES, MARBELLACHAIN_RELEASES);
-        QString message(tr("New version of MarbellaChain wallet is available on the MarbellaChain source code repository: <br /> %1. <br />It is recommended to download it and update this application").arg(link));
+        QString link = QString("<a href=%1>%2</a>").arg(MCHAIN_RELEASES, MCHAIN_RELEASES);
+        QString message(tr("New version of Mchain wallet is available on the Mchain source code repository: <br /> %1. <br />It is recommended to download it and update this application").arg(link));
         QMessageBox::information(this, tr("Check for updates"), message);
     }
 
@@ -340,7 +340,7 @@ void BitcoinGUI::createActions()
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(tr("&Send"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a MarbellaChain address"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a Mchain address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
@@ -351,7 +351,7 @@ void BitcoinGUI::createActions()
     sendCoinsMenuAction->setToolTip(sendCoinsMenuAction->statusTip());
 
     receiveCoinsAction = new QAction(tr("&Receive"), this);
-    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and marbellachain: URIs)"));
+    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and mchain: URIs)"));
     receiveCoinsAction->setToolTip(receiveCoinsAction->statusTip());
     receiveCoinsAction->setCheckable(true);
     receiveCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_3));
@@ -452,9 +452,9 @@ void BitcoinGUI::createActions()
     lockWalletAction = new QAction(platformStyle->MenuColorIcon(":/icons/lock_closed"), tr("&Lock Wallet"), this);
     lockWalletAction->setToolTip(tr("Lock wallet"));
     signMessageAction = new QAction(platformStyle->MenuColorIcon(":/icons/edit"), tr("Sign &message..."), this);
-    signMessageAction->setStatusTip(tr("Sign messages with your MarbellaChain addresses to prove you own them"));
+    signMessageAction->setStatusTip(tr("Sign messages with your Mchain addresses to prove you own them"));
     verifyMessageAction = new QAction(platformStyle->MenuColorIcon(":/icons/verify"), tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified MarbellaChain addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Mchain addresses"));
 
     openRPCConsoleAction = new QAction(platformStyle->MenuColorIcon(":/icons/debugwindow"), tr("&Debug window"), this);
     openRPCConsoleAction->setStatusTip(tr("Open debugging and diagnostic console"));
@@ -467,11 +467,11 @@ void BitcoinGUI::createActions()
     usedReceivingAddressesAction->setStatusTip(tr("Show the list of used receiving addresses and labels"));
 
     openAction = new QAction(platformStyle->MenuColorIcon(":/icons/open"), tr("Open &URI..."), this);
-    openAction->setStatusTip(tr("Open a marbellachain: URI or payment request"));//MARBELLACHAIN_LINE
+    openAction->setStatusTip(tr("Open a mchain: URI or payment request"));//MCHAIN_LINE
 
     showHelpMessageAction = new QAction(platformStyle->MenuColorIcon(":/icons/info"), tr("&Command-line options"), this);
     showHelpMessageAction->setMenuRole(QAction::NoRole);
-    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible MarbellaChain command-line options").arg(tr(PACKAGE_NAME)));
+    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible Mchain command-line options").arg(tr(PACKAGE_NAME)));
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
@@ -899,7 +899,7 @@ void BitcoinGUI::updateNetworkState()
     QString tooltip;
 
     if (clientModel->getNetworkActive()) {
-        tooltip = tr("%n active connection(s) to MarbellaChain network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
+        tooltip = tr("%n active connection(s) to Mchain network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
     } else {
         tooltip = tr("Network activity disabled.") + QString("<br>") + tr("Click to enable network activity again.");
         icon = ":/icons/network_disabled";
@@ -1050,7 +1050,7 @@ void BitcoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVer
 
 void BitcoinGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
 {
-    QString strTitle = tr("MarbellaChain"); // default title
+    QString strTitle = tr("Mchain"); // default title
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;

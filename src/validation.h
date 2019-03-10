@@ -32,17 +32,17 @@
 
 #include <consensus/consensus.h>
 
-/////////////////////////////////////////// marbellachain
-#include <marbellachain/marbellachainstate.h>
-#include <marbellachain/marbellachainDGP.h>
+/////////////////////////////////////////// mchain
+#include <mchain/mchainstate.h>
+#include <mchain/mchainDGP.h>
 #include <libethereum/ChainParams.h>
 #include <libethashseal/Ethash.h>
 #include <libethashseal/GenesisInfo.h>
 #include <script/standard.h>
-#include <marbellachain/storageresults.h>
+#include <mchain/storageresults.h>
 
 
-extern std::unique_ptr<MarbellaChainState> globalState;
+extern std::unique_ptr<MchainState> globalState;
 extern std::shared_ptr<dev::eth::SealEngineFace> globalSealEngine;
 extern bool fRecordLogOpcodes;
 extern bool fIsVMlogFile;
@@ -50,7 +50,7 @@ extern bool fGettingValuesDGP;
 
 struct EthTransactionParams;
 using valtype = std::vector<unsigned char>;
-using ExtractMarbellaChainTX = std::pair<std::vector<MarbellaChainTransaction>, std::vector<EthTransactionParams>>;
+using ExtractMchainTX = std::pair<std::vector<MchainTransaction>, std::vector<EthTransactionParams>>;
 ///////////////////////////////////////////
 
 class CBlockIndex;
@@ -185,7 +185,7 @@ static const uint64_t DEFAULT_GAS_LIMIT_OP_SEND=250000;
 static const CAmount DEFAULT_GAS_PRICE=0.00000040*COIN;
 static const CAmount MAX_RPC_GAS_PRICE=0.00000100*COIN;
 
-static const size_t MAX_CONTRACT_VOUTS = 1000; // marbellachain
+static const size_t MAX_CONTRACT_VOUTS = 1000; // mchain
 
 struct BlockHasher
 {
@@ -361,7 +361,7 @@ std::string FormatStateMessage(const CValidationState &state);
 /** Get the BIP9 state for a given deployment at the current tip. */
 ThresholdState VersionBitsTipState(const Consensus::Params& params, Consensus::DeploymentPos pos);
 
-//////////////////////////////////////////////////////////// // marbellachain
+//////////////////////////////////////////////////////////// // mchain
 struct CHeightTxIndexIteratorKey {
     unsigned int height;
 
@@ -606,7 +606,7 @@ bool LoadMempool();
 
 bool CheckReward(const CBlock& block, CValidationState& state, int nHeight, const Consensus::Params& consensusParams, CAmount nFees, CAmount gasRefunds, CAmount nActualStakeReward, const std::vector<CTxOut>& vouts);
 
-//////////////////////////////////////////////////////// marbellachain
+//////////////////////////////////////////////////////// mchain
 std::vector<ResultExecute> CallContract(const dev::Address& addrContract, std::vector<unsigned char> opcode, const dev::Address& sender = dev::Address(), uint64_t gasLimit=0);
 
 bool CheckSenderScript(const CCoinsViewCache& view, const CTransaction& tx);
@@ -615,8 +615,8 @@ bool CheckMinGasPrice(std::vector<EthTransactionParams>& etps, const uint64_t& m
 
 struct ByteCodeExecResult;
 
-void EnforceContractVoutLimit(ByteCodeExecResult& bcer, ByteCodeExecResult& bcerOut, const dev::h256& oldHashMarbellaChainRoot,
-    const dev::h256& oldHashStateRoot, const std::vector<MarbellaChainTransaction>& transactions);
+void EnforceContractVoutLimit(ByteCodeExecResult& bcer, ByteCodeExecResult& bcerOut, const dev::h256& oldHashMchainRoot,
+    const dev::h256& oldHashStateRoot, const std::vector<MchainTransaction>& transactions);
 
 void writeVMlog(const std::vector<ResultExecute>& res, const CTransaction& tx = CTransaction(), const CBlock& block = CBlock());
 
@@ -643,13 +643,13 @@ struct ByteCodeExecResult{
     std::vector<CTransaction> valueTransfers;
 };
 
-class MarbellaChainTxConverter{
+class MchainTxConverter{
 
 public:
 
-    MarbellaChainTxConverter(CTransaction tx, CCoinsViewCache* v = NULL, const std::vector<CTransactionRef>* blockTxs = NULL) : txBit(tx), view(v), blockTransactions(blockTxs){}
+    MchainTxConverter(CTransaction tx, CCoinsViewCache* v = NULL, const std::vector<CTransactionRef>* blockTxs = NULL) : txBit(tx), view(v), blockTransactions(blockTxs){}
 
-    bool extractionMarbellaChainTransactions(ExtractMarbellaChainTX& marbellachainTx);
+    bool extractionMchainTransactions(ExtractMchainTX& mchainTx);
 
 private:
 
@@ -657,7 +657,7 @@ private:
 
     bool parseEthTXParams(EthTransactionParams& params);
 
-    MarbellaChainTransaction createEthTX(const EthTransactionParams& etp, const uint32_t nOut);
+    MchainTransaction createEthTX(const EthTransactionParams& etp, const uint32_t nOut);
 
     const CTransaction txBit;
     const CCoinsViewCache* view;
@@ -671,7 +671,7 @@ class ByteCodeExec {
 
 public:
 
-    ByteCodeExec(const CBlock& _block, std::vector<MarbellaChainTransaction> _txs, const uint64_t _blockGasLimit) : txs(_txs), block(_block), blockGasLimit(_blockGasLimit) {}
+    ByteCodeExec(const CBlock& _block, std::vector<MchainTransaction> _txs, const uint64_t _blockGasLimit) : txs(_txs), block(_block), blockGasLimit(_blockGasLimit) {}
 
     bool performByteCode(dev::eth::Permanence type = dev::eth::Permanence::Committed);
 
@@ -685,7 +685,7 @@ private:
 
     dev::Address EthAddrFromScript(const CScript& scriptIn);
 
-    std::vector<MarbellaChainTransaction> txs;
+    std::vector<MchainTransaction> txs;
 
     std::vector<ResultExecute> result;
 

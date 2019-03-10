@@ -29,8 +29,8 @@ std::string CBlock::ToString() const
         hashPrevBlock.ToString(),
         hashMerkleRoot.ToString(),
         nTime, nBits, nNonce,
-        hashStateRoot.ToString(), // marbellachain
-        hashUTXORoot.ToString(), // marbellachain
+        hashStateRoot.ToString(), // mchain
+        hashUTXORoot.ToString(), // mchain
         HexStr(vchBlockSig),
         IsProofOfStake() ? "PoS" : "PoW",
         prevoutStake.ToString(),

@@ -1507,7 +1507,7 @@ void ThreadMapPort()
             }
         }
 
-        std::string strDesc = "MarbellaChain " + FormatFullVersion();
+        std::string strDesc = "Mchain " + FormatFullVersion();
 
         try {
             while (true) {

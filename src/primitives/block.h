@@ -29,8 +29,8 @@ public:
     uint32_t nTime;
     uint32_t nBits;
     uint32_t nNonce;
-    uint256 hashStateRoot; // marbellachain
-    uint256 hashUTXORoot; // marbellachain
+    uint256 hashStateRoot; // mchain
+    uint256 hashUTXORoot; // mchain
     // proof-of-stake specific fields
     COutPoint prevoutStake;
     std::vector<unsigned char> vchBlockSig;
@@ -50,8 +50,8 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
-        READWRITE(hashStateRoot); // marbellachain
-        READWRITE(hashUTXORoot); // marbellachain
+        READWRITE(hashStateRoot); // mchain
+        READWRITE(hashUTXORoot); // mchain
         READWRITE(prevoutStake);
         if (!(s.GetType() & SER_WITHOUT_SIGNATURE))
             READWRITE(vchBlockSig);
@@ -65,8 +65,8 @@ public:
         nTime = 0;
         nBits = 0;
         nNonce = 0;
-        hashStateRoot.SetNull(); // marbellachain
-        hashUTXORoot.SetNull(); // marbellachain
+        hashStateRoot.SetNull(); // mchain
+        hashUTXORoot.SetNull(); // mchain
         vchBlockSig.clear();
         prevoutStake.SetNull();
     }
@@ -86,7 +86,7 @@ public:
     }
     
     // ppcoin: two types of block: proof-of-work or proof-of-stake
-    virtual bool IsProofOfStake() const //marbellachain
+    virtual bool IsProofOfStake() const //mchain
     {
         return !prevoutStake.IsNull();
     }
@@ -106,7 +106,7 @@ public:
         return ret;
     }
 
-    CBlockHeader& operator=(const CBlockHeader& other) //marbellachain
+    CBlockHeader& operator=(const CBlockHeader& other) //mchain
     {
         if (this != &other)
         {
@@ -161,7 +161,7 @@ public:
         fChecked = false;
     }
 
-    std::pair<COutPoint, unsigned int> GetProofOfStake() const //marbellachain
+    std::pair<COutPoint, unsigned int> GetProofOfStake() const //mchain
     {
         return IsProofOfStake()? std::make_pair(prevoutStake, nTime) : std::make_pair(COutPoint(), (unsigned int)0);
     }
@@ -175,8 +175,8 @@ public:
         block.nTime          = nTime;
         block.nBits          = nBits;
         block.nNonce         = nNonce;
-        block.hashStateRoot  = hashStateRoot; // marbellachain
-        block.hashUTXORoot   = hashUTXORoot; // marbellachain
+        block.hashStateRoot  = hashStateRoot; // mchain
+        block.hashUTXORoot   = hashUTXORoot; // mchain
         block.vchBlockSig    = vchBlockSig;
         block.prevoutStake   = prevoutStake;
         return block;

@@ -6,7 +6,7 @@ DIST_SUBDIRS = secp256k1 univalue
 
 AM_LDFLAGS = $(PTHREAD_CFLAGS) $(LIBTOOL_LDFLAGS) $(HARDENED_LDFLAGS)
 AM_CXXFLAGS = $(HARDENED_CXXFLAGS) $(ERROR_CXXFLAGS) -DETH_FATDB=1
-AM_CPPFLAGS = $(HARDENED_CPPFLAGS) -DMARBELLACHAIN_BUILD
+AM_CPPFLAGS = $(HARDENED_CPPFLAGS) -DMCHAIN_BUILD
 EXTRA_LIBRARIES =
 
 if EMBEDDED_UNIVALUE
@@ -69,11 +69,11 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += marbellachaind
+  bin_PROGRAMS += mchaind
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += marbellachain-cli marbellachain-tx
+  bin_PROGRAMS += mchain-cli mchain-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
@@ -180,10 +180,10 @@ BITCOIN_CORE_H = \
   zmq/zmqconfig.h\
   zmq/zmqnotificationinterface.h \
   zmq/zmqpublishnotifier.h \
-  marbellachain/marbellachainstate.h \
-  marbellachain/marbellachaintransaction.h \
-  marbellachain/marbellachainDGP.h \
-  marbellachain/storageresults.h
+  mchain/mchainstate.h \
+  mchain/mchaintransaction.h \
+  mchain/mchainDGP.h \
+  mchain/storageresults.h
 
 
 obj/build.h: FORCE
@@ -235,11 +235,11 @@ libbitcoin_server_a_SOURCES = \
   validation.cpp \
   validationinterface.cpp \
   versionbits.cpp \
-  marbellachain/marbellachainstate.cpp \
-  marbellachain/marbellachaintransaction.cpp \
-  marbellachain/marbellachainDGP.cpp \
+  mchain/mchainstate.cpp \
+  mchain/mchaintransaction.cpp \
+  mchain/mchainDGP.cpp \
   consensus/consensus.cpp \
-  marbellachain/storageresults.cpp \
+  mchain/storageresults.cpp \
   $(BITCOIN_CORE_H)
 
 if ENABLE_ZMQ
@@ -348,7 +348,7 @@ libbitcoin_consensus_a_SOURCES = \
   version.h
 
 # common: shared between bitcoind, and bitcoin-qt and non-server tools
-libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) -DMARBELLACHAIN_BUILD
+libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) -DMCHAIN_BUILD
 libbitcoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_common_a_CFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -std=c99
 libbitcoin_common_a_SOURCES = \
@@ -517,8 +517,8 @@ libbitcoin_common_a_SOURCES = \
   cpp-ethereum/libethashseal/genesis/homesteadTest.cpp \
   cpp-ethereum/libethashseal/genesis/mainNetworkTest.cpp \
   cpp-ethereum/libethashseal/genesis/metropolisTest.cpp \
-  cpp-ethereum/libethashseal/genesis/marbellachainMainNetwork.cpp \
-  cpp-ethereum/libethashseal/genesis/marbellachainTestNetwork.cpp \
+  cpp-ethereum/libethashseal/genesis/mchainMainNetwork.cpp \
+  cpp-ethereum/libethashseal/genesis/mchainTestNetwork.cpp \
   cpp-ethereum/libethashseal/genesis/ropsten.cpp \
   cpp-ethereum/libethashseal/genesis/transitionnetTest.cpp \
   cpp-ethereum/libethash/ethash.h \
@@ -593,16 +593,16 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-marbellachaind_SOURCES = bitcoind.cpp
-marbellachaind_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-marbellachaind_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-marbellachaind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+mchaind_SOURCES = bitcoind.cpp
+mchaind_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+mchaind_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+mchaind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-marbellachaind_SOURCES += bitcoind-res.rc
+mchaind_SOURCES += bitcoind-res.rc
 endif
 
-marbellachaind_LDADD = \
+mchaind_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBUNIVALUE) \
@@ -617,19 +617,19 @@ marbellachaind_LDADD = \
   $(LIBCRYPTOPP) \
   $(LIBSECP256K1)
 
-marbellachaind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+mchaind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
 # bitcoin-cli binary #
-marbellachain_cli_SOURCES = bitcoin-cli.cpp
-marbellachain_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-marbellachain_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-marbellachain_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+mchain_cli_SOURCES = bitcoin-cli.cpp
+mchain_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+mchain_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+mchain_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-marbellachain_cli_SOURCES += bitcoin-cli-res.rc
+mchain_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-marbellachain_cli_LDADD = \
+mchain_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
@@ -640,20 +640,20 @@ marbellachain_cli_LDADD = \
   $(LIBCRYPTOPP) \
   $(LIBSECP256K1)
 
-marbellachain_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+mchain_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # bitcoin-tx binary #
-marbellachain_tx_SOURCES = bitcoin-tx.cpp consensus/consensus.cpp
-marbellachain_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-marbellachain_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-marbellachain_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+mchain_tx_SOURCES = bitcoin-tx.cpp consensus/consensus.cpp
+mchain_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+mchain_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+mchain_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-marbellachain_tx_SOURCES += bitcoin-tx-res.rc
+mchain_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-marbellachain_tx_LDADD = \
+mchain_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -665,7 +665,7 @@ marbellachain_tx_LDADD = \
   $(LIBCRYPTOPP) \
   $(LIBSECP256K1)
 
-marbellachain_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+mchain_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #

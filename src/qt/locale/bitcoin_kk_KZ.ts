@@ -70,7 +70,7 @@
         <translation>Құпия сөзді өзгерту</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
+        <source>Mchain</source>
         <translation>Биткоин</translation>
     </message>
     <message>
@@ -169,7 +169,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>MarbellaChain</source>
+        <source>Mchain</source>
         <translation>Биткоин</translation>
     </message>
     <message>
@@ -306,7 +306,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Information</source>
         <translation>Информация</translation>

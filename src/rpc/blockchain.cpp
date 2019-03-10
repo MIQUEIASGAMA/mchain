@@ -161,8 +161,8 @@ UniValue blockheaderToJSON(const CBlockIndex* blockindex)
     result.push_back(Pair("bits", strprintf("%08x", blockindex->nBits)));
     result.push_back(Pair("difficulty", GetDifficulty(blockindex)));
     result.push_back(Pair("chainwork", blockindex->nChainWork.GetHex()));
-    result.push_back(Pair("hashStateRoot", blockindex->hashStateRoot.GetHex())); // marbellachain
-    result.push_back(Pair("hashUTXORoot", blockindex->hashUTXORoot.GetHex())); // marbellachain
+    result.push_back(Pair("hashStateRoot", blockindex->hashStateRoot.GetHex())); // mchain
+    result.push_back(Pair("hashUTXORoot", blockindex->hashUTXORoot.GetHex())); // mchain
 
     if (blockindex->pprev)
         result.push_back(Pair("previousblockhash", blockindex->pprev->GetBlockHash().GetHex()));
@@ -194,8 +194,8 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     result.push_back(Pair("version", block.nVersion));
     result.push_back(Pair("versionHex", strprintf("%08x", block.nVersion)));
     result.push_back(Pair("merkleroot", block.hashMerkleRoot.GetHex()));
-    result.push_back(Pair("hashStateRoot", block.hashStateRoot.GetHex())); // marbellachain
-    result.push_back(Pair("hashUTXORoot", block.hashUTXORoot.GetHex())); // marbellachain
+    result.push_back(Pair("hashStateRoot", block.hashStateRoot.GetHex())); // mchain
+    result.push_back(Pair("hashUTXORoot", block.hashUTXORoot.GetHex())); // mchain
     UniValue txs(UniValue::VARR);
     for(const auto& tx : block.vtx)
     {
@@ -231,7 +231,7 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     return result;
 }
 
-//////////////////////////////////////////////////////////////////////////// // marbellachain
+//////////////////////////////////////////////////////////////////////////// // mchain
 UniValue executionResultToJSON(const dev::eth::ExecutionResult& exRes)
 {
     UniValue result(UniValue::VOBJ);
@@ -1043,7 +1043,7 @@ UniValue getblock(const JSONRPCRequest& request)
     return blockToJSON(block, pblockindex, verbosity >= 2);
 }
 
-////////////////////////////////////////////////////////////////////// // marbellachain
+////////////////////////////////////////////////////////////////////// // mchain
 UniValue callcontract(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 2)
@@ -1073,9 +1073,9 @@ UniValue callcontract(const JSONRPCRequest& request)
     
     dev::Address senderAddress;
     if(request.params.size() == 3){
-        CTxDestination marbellachainSenderAddress = DecodeDestination(request.params[2].get_str());
-        if (IsValidDestination(marbellachainSenderAddress)) {
-            const CKeyID *keyid = boost::get<CKeyID>(&marbellachainSenderAddress);
+        CTxDestination mchainSenderAddress = DecodeDestination(request.params[2].get_str());
+        if (IsValidDestination(mchainSenderAddress)) {
+            const CKeyID *keyid = boost::get<CKeyID>(&mchainSenderAddress);
             senderAddress = dev::Address(HexStr(valtype(keyid->begin(),keyid->end())));
         }else{
             senderAddress = dev::Address(request.params[2].get_str());
@@ -1852,8 +1852,8 @@ UniValue gettxout(const JSONRPCRequest& request)
             "     \"hex\" : \"hex\",        (string) \n"
             "     \"reqSigs\" : n,          (numeric) Number of required signatures\n"
             "     \"type\" : \"pubkeyhash\", (string) The type, eg pubkeyhash\n"
-            "     \"addresses\" : [          (array of string) array of marbellachain addresses\n"
-            "        \"address\"     (string) marbellachain address\n"
+            "     \"addresses\" : [          (array of string) array of mchain addresses\n"
+            "        \"address\"     (string) mchain address\n"
             "        ,...\n"
             "     ]\n"
             "  },\n"

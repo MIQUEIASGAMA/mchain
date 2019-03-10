@@ -6,7 +6,7 @@
 
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import assert_equal
-from test_framework.marbellachain import convert_btc_address_to_marbellachain
+from test_framework.mchain import convert_btc_address_to_mchain
 
 class SignMessagesTest(BitcoinTestFramework):
     def set_test_params(self):
@@ -19,7 +19,7 @@ class SignMessagesTest(BitcoinTestFramework):
 
         self.log.info('test signing with priv_key')
         priv_key = 'cUeKHd5orzT3mz8P9pxyREHfsWtVfgsfDjiZZBcjUBAaGk1BTj7N'
-        address = convert_btc_address_to_marbellachain('mpLQjfK79b7CCV4VMJWEWAj5Mpx8Up5zxB')
+        address = convert_btc_address_to_mchain('mpLQjfK79b7CCV4VMJWEWAj5Mpx8Up5zxB')
         expected_signature = 'H82vbb1DFcGX32hHYCrWxCxo9aQCSSm4caa/+rvV2rdrT3YrZgkIQOIydNkd8F9rI94tTCgjzL/rplldv0ImR4I='
         signature = self.nodes[0].signmessagewithprivkey(priv_key, message)
         assert_equal(expected_signature, signature)

@@ -306,7 +306,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Information</source>
         <translation>තොරතුර</translation>

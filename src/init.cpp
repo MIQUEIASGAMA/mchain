@@ -182,7 +182,7 @@ void Shutdown()
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("marbellachain-shutoff");
+    RenameThread("mchain-shutoff");
     mempool.AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -535,8 +535,8 @@ std::string HelpMessage(HelpMessageMode mode)
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/marbellachain/marbellachain>";
-    const std::string URL_WEBSITE = "<https://marbellachain.org>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/mchainnetwork/mchain>";
+    const std::string URL_WEBSITE = "<https://mchain.network>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i"), COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -1237,7 +1237,7 @@ bool AppInitMain()
         }
     }
 
-////////////////////////////////////////////////////////////////////// // marbellachain
+////////////////////////////////////////////////////////////////////// // mchain
     dev::g_logPost = [&](std::string const& s, char const* c){ LogPrintStr(s + '\n', true); };
     dev::g_logPost(std::string("\n\n\n\n\n\n\n\n\n\n"), NULL);
 //////////////////////////////////////////////////////////////////////
@@ -1547,7 +1547,7 @@ bool AppInitMain()
                     assert(chainActive.Tip() != nullptr);
                 }
 
-                /////////////////////////////////////////////////////////// marbellachain
+                /////////////////////////////////////////////////////////// mchain
                 if((gArgs.IsArgSet("-dgpstorage") && gArgs.IsArgSet("-dgpevm")) || (!gArgs.IsArgSet("-dgpstorage") && gArgs.IsArgSet("-dgpevm")) ||
                   (!gArgs.IsArgSet("-dgpstorage") && !gArgs.IsArgSet("-dgpevm"))){
                     fGettingValuesDGP = true;
@@ -1556,16 +1556,16 @@ bool AppInitMain()
                 }
 
                 dev::eth::Ethash::init();
-                fs::path marbellachainStateDir = GetDataDir() / "stateMarbellaChain";
-                bool fStatus = fs::exists(marbellachainStateDir);
-                const std::string dirMarbellaChain(marbellachainStateDir.string());
+                fs::path mchainStateDir = GetDataDir() / "stateMchain";
+                bool fStatus = fs::exists(mchainStateDir);
+                const std::string dirMchain(mchainStateDir.string());
                 const dev::h256 hashDB(dev::sha3(dev::rlp("")));
-                dev::eth::BaseState existsMarbellaChainstate = fStatus ? dev::eth::BaseState::PreExisting : dev::eth::BaseState::Empty;
-                globalState = std::unique_ptr<MarbellaChainState>(new MarbellaChainState(dev::u256(0), MarbellaChainState::openDB(dirMarbellaChain, hashDB, dev::WithExisting::Trust), dirMarbellaChain, existsMarbellaChainstate));
-                dev::eth::ChainParams cp((dev::eth::genesisInfo(dev::eth::Network::marbellachainMainNetwork)));
+                dev::eth::BaseState existsMchainstate = fStatus ? dev::eth::BaseState::PreExisting : dev::eth::BaseState::Empty;
+                globalState = std::unique_ptr<MchainState>(new MchainState(dev::u256(0), MchainState::openDB(dirMchain, hashDB, dev::WithExisting::Trust), dirMchain, existsMchainstate));
+                dev::eth::ChainParams cp((dev::eth::genesisInfo(dev::eth::Network::mchainMainNetwork)));
                 globalSealEngine = std::unique_ptr<dev::eth::SealEngineFace>(cp.createSealEngine());
 
-                pstorageresult.reset(new StorageResults(marbellachainStateDir.string()));
+                pstorageresult.reset(new StorageResults(mchainStateDir.string()));
                 if (fReset) {
                     pstorageresult->wipeResults();
                 }

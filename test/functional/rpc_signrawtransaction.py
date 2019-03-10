@@ -6,7 +6,7 @@
 
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
-from test_framework.marbellachain import convert_btc_address_to_marbellachain
+from test_framework.mchain import convert_btc_address_to_mchain
 
 class SignRawTransactionsTest(BitcoinTestFramework):
     def set_test_params(self):
@@ -30,7 +30,7 @@ class SignRawTransactionsTest(BitcoinTestFramework):
              'scriptPubKey': '76a914669b857c03a5ed269d5d85a1ffac9ed5d663072788ac'},
         ]
 
-        outputs = {convert_btc_address_to_marbellachain('mpLQjfK79b7CCV4VMJWEWAj5Mpx8Up5zxB'): 0.1}
+        outputs = {convert_btc_address_to_mchain('mpLQjfK79b7CCV4VMJWEWAj5Mpx8Up5zxB'): 0.1}
 
         rawTx = self.nodes[0].createrawtransaction(inputs, outputs)
         rawTxSigned = self.nodes[0].signrawtransaction(rawTx, inputs, privKeys)
@@ -71,7 +71,7 @@ class SignRawTransactionsTest(BitcoinTestFramework):
              'scriptPubKey': 'badbadbadbad'}
         ]
 
-        outputs = {convert_btc_address_to_marbellachain('mpLQjfK79b7CCV4VMJWEWAj5Mpx8Up5zxB'): 0.1}
+        outputs = {convert_btc_address_to_mchain('mpLQjfK79b7CCV4VMJWEWAj5Mpx8Up5zxB'): 0.1}
 
         rawTx = self.nodes[0].createrawtransaction(inputs, outputs)
 

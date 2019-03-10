@@ -13,7 +13,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"org.marbellachain.MarbellaChain-Qt";
+        return @"org.mchain.Mchain-Qt";
     } else {
         return [self __bundleIdentifier];
     }

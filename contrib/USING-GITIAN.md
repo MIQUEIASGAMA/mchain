@@ -7,14 +7,14 @@ Generate GPG key on your computer:
 3. ```gpg --armor --export 3AA5C34371567BD2```(Enter the hash from previous command)
 Copy got gpg key into the /contrib/gitian-keys/ folder with .pgp format.
 ### Setting up Gitian
-1. Replace .yml files in marbellachain/contrib/gitian-descriptors folder. Replace gitian-build.sh in marbellachain/contrib folder. Add windeploy/ folder into the marbellachain/contrib. Push these changes to remote repository https://github.com/marbellachain/marbellachain/. Also very important, windeploy/ folder should be The same version as you want to build. You will couldn't build win binaries without this folder in version which you want to build.
-2. gitian-build.sh script should be started from directory where marbellachain places(like in instruction).
+1. Replace .yml files in mchain/contrib/gitian-descriptors folder. Replace gitian-build.sh in mchain/contrib folder. Add windeploy/ folder into the mchain/contrib. Push these changes to remote repository https://github.com/mchainnetwork/mchain/. Also very important, windeploy/ folder should be The same version as you want to build. You will couldn't build win binaries without this folder in version which you want to build.
+2. gitian-build.sh script should be started from directory where mchain places(like in instruction).
 ##### First time / New Gitian builders
-These actions are executed once when first using gitian-builder. If you have used gitian-builder for marbellachain skip these steps.
-1. ```marbellachain/contrib/gitian-build.sh --setup``` This command create and setup virtual machines to build your binaries files. This command may take a while (about 40 minutes). If you want to use KVM as build VM , run script with ```--kvm```.
-    ```marbellachain/contrib/gitian-build.sh --setup --kvm```
+These actions are executed once when first using gitian-builder. If you have used gitian-builder for mchain skip these steps.
+1. ```mchain/contrib/gitian-build.sh --setup``` This command create and setup virtual machines to build your binaries files. This command may take a while (about 40 minutes). If you want to use KVM as build VM , run script with ```--kvm```.
+    ```mchain/contrib/gitian-build.sh --setup --kvm```
 
-2. Create the OS X SDK tarball( https://github.com/marbellachain/marbellachain/blob/master/doc/README_osx.md), create inputs/ folder in gitian-builder/ . Copy MacOSX10.11.sdk.tar.gz into the inputs/ directory.
+2. Create the OS X SDK tarball( https://github.com/mchainnetwork/mchain/blob/master/doc/README_osx.md), create inputs/ folder in gitian-builder/ . Copy MacOSX10.11.sdk.tar.gz into the inputs/ directory.
 ##### Not first time
 Ensure that the ./gitian.sigs directory is up to date for signs verifying.
 
@@ -28,10 +28,10 @@ Ensure that the ./gitian-builder directory is up to date.
     git pull
     popd
 
-### Build and sign MarbellaChain for Linux, Windows, and OS X:
+### Build and sign Mchain for Linux, Windows, and OS X:
 
-  ```marbellachain/contrib/gitian-build.sh --build --signer signer version``` or 
-  ```marbellachain/contrib/gitian-build.sh --build --kvm --signer signer version```
+  ```mchain/contrib/gitian-build.sh --build --signer signer version``` or 
+  ```mchain/contrib/gitian-build.sh --build --kvm --signer signer version```
 
 signer — GPG Signer sign assert files for builds (name you entered with GPG key creation). When script is running you must specify passphrase. Use passphrase you entered with the GPG key creation. 
 
@@ -47,12 +47,12 @@ When script is running you may check state of installation and build progress wi
     
 Output will look something like:
     
-    Initialized empty Git repository in /home/gitianuser/gitian-builder/inputs/marbellachain/.git/
+    Initialized empty Git repository in /home/gitianuser/gitian-builder/inputs/mchain/.git/
     remote: Counting objects: 57959, done.
     remote: Total 57959 (delta 0), reused 0 (delta 0), pack-reused 57958
     Receiving objects: 100% (57959/57959), 53.76 MiB | 484.00 KiB/s, done.
     Resolving deltas: 100% (41590/41590), done.
-    From https://github.com/marbellachain/marbellachain
+    From https://github.com/mchainnetwork/mchain
     ... (new tags, new branch etc)
     --- Building for trusty amd64 ---
     Stopping target if it is up
@@ -70,51 +70,51 @@ Output will look something like:
     Running build script (log in var/build.log)
 
 
-Binaries will be in marbellachain-binaries/ . Signatures will appear in gitian.sigs/ . Signatures will be committed and you should push it manually. Sigs haven't committed with ```--no-commit```.
+Binaries will be in mchain-binaries/ . Signatures will appear in gitian.sigs/ . Signatures will be committed and you should push it manually. Sigs haven't committed with ```--no-commit```.
 
 Build output expected:
 
-  1. source tarball (`marbellachain-${VERSION}.tar.gz`)
-  2. linux 32-bit and 64-bit dist tarballs (`marbellachain-${VERSION}-linux[32|64].tar.gz`)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (`marbellachain-${VERSION}-win[32|64]-setup-unsigned.exe`, `marbellachain-${VERSION}-win[32|64].zip`)
-  4. OS X unsigned installer and dist tarball (`marbellachain-${VERSION}-osx-unsigned.dmg`, `marbellachain-${VERSION}-osx64.tar.gz`)
+  1. source tarball (`mchain-${VERSION}.tar.gz`)
+  2. linux 32-bit and 64-bit dist tarballs (`mchain-${VERSION}-linux[32|64].tar.gz`)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (`mchain-${VERSION}-win[32|64]-setup-unsigned.exe`, `mchain-${VERSION}-win[32|64].zip`)
+  4. OS X unsigned installer and dist tarball (`mchain-${VERSION}-osx-unsigned.dmg`, `mchain-${VERSION}-osx64.tar.gz`)
   5. Gitian signatures (in `gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
 Add other gitian builders keys to your gpg keyring
 
-    gpg --import marbellachain/contrib/gitian-keys/*.pgp
+    gpg --import mchain/contrib/gitian-keys/*.pgp
     gpg --refresh-keys
 
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../marbellachain/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../marbellachain/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../marbellachain/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../mchain/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../mchain/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../mchain/contrib/gitian-descriptors/gitian-osx.yml
     popd
 
 ### Next steps:
 
 Codesigner only: Sign the osx binary:
 
-    transfer marbellachain-osx-unsigned.tar.gz to osx for signing
-    tar xf marbellachain-osx-unsigned.tar.gz
+    transfer mchain-osx-unsigned.tar.gz to osx for signing
+    tar xf mchain-osx-unsigned.tar.gz
     ./detached-sig-create.sh -s "Key ID"
     Enter the keychain password and authorize the signature
     Move signature-osx.tar.gz back to the gitian host
 
 Codesigner only: Sign the windows binaries:
 
-    tar xf marbellachain-win-unsigned.tar.gz
+    tar xf mchain-win-unsigned.tar.gz
     ./detached-sig-create.sh -key /path/to/codesign.key
     Enter the passphrase for the key when prompted
     signature-win.tar.gz will be created
 
 Codesigner only: Commit the detached codesign payloads:
 
-    cd /path/to/marbellachain-detached-sigs
+    cd /path/to/mchain-detached-sigs
     checkout the appropriate branch for this release series
     rm -rf *
     tar xf signature-osx.tar.gz
@@ -126,14 +126,14 @@ Codesigner only: Commit the detached codesign payloads:
 Non-codesigners: wait for Windows/OS X detached signatures:
 
     Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
-    Detached signatures will then be committed to the marbellachain-detached-sigs repository, which can be combined with the unsigned apps to create signed binaries.
+    Detached signatures will then be committed to the mchain-detached-sigs repository, which can be combined with the unsigned apps to create signed binaries.
 
 Create the signed OS X binary:
-```marbellachain/contrib/gitian-build.sh --sign -o x --signer signer version```
+```mchain/contrib/gitian-build.sh --sign -o x --signer signer version```
 
 Create the signed Win binary:
-```marbellachain/contrib/gitian-build.sh --sign -o w --signer signer version```
+```mchain/contrib/gitian-build.sh --sign -o w --signer signer version```
 
 Commit your signed signatures for OS X and Win.
 You can verify all binaries with:
-```marbellachain/contrib/gitian-build.sh --verify version```
+```mchain/contrib/gitian-build.sh --verify version```

@@ -82,8 +82,8 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char * const BITCOIN_CONF_FILENAME = "marbellachain.conf";
-const char * const BITCOIN_PID_FILENAME = "marbellachaind.pid";
+const char * const BITCOIN_CONF_FILENAME = "mchain.conf";
+const char * const BITCOIN_PID_FILENAME = "mchaind.pid";
 const char * const DEFAULT_DEBUGLOGFILE = "debug.log";
 const char * const DEFAULT_DEBUGVMLOGFILE = "vm.log";
 
@@ -174,7 +174,7 @@ static FILE* fileout = nullptr;
 static boost::mutex* mutexDebugLog = nullptr;
 static std::list<std::string>* vMsgsBeforeOpenLog;
 
-/////////////////////////////////////////////////////////////////////// // marbellachain
+/////////////////////////////////////////////////////////////////////// // mchain
 static FILE* fileoutVM = nullptr;
 ///////////////////////////////////////////////////////////////////////
 
@@ -216,12 +216,12 @@ bool OpenDebugLog()
     boost::mutex::scoped_lock scoped_lock(*mutexDebugLog);
 
     assert(fileout == nullptr);
-    assert(fileoutVM == nullptr); // marbellachain
+    assert(fileoutVM == nullptr); // mchain
     assert(vMsgsBeforeOpenLog);
     fs::path pathDebug = GetDebugLogPath();
-    fs::path pathDebugVM = GetDebugVMLogPath(); // marbellachain
+    fs::path pathDebugVM = GetDebugVMLogPath(); // mchain
     fileout = fsbridge::fopen(pathDebug, "a");
-    fileoutVM = fsbridge::fopen(pathDebugVM, "a"); // marbellachain
+    fileoutVM = fsbridge::fopen(pathDebugVM, "a"); // mchain
     if (!fileout || !fileoutVM) {
         return false;
     }
@@ -234,7 +234,7 @@ bool OpenDebugLog()
             vMsgsBeforeOpenLog->pop_front();
         }
     }
-    ///////////////////////////////////////////// // marbellachain
+    ///////////////////////////////////////////// // mchain
     if (fileoutVM) {
         setbuf(fileoutVM, nullptr); // unbuffered
         // dump buffered messages from before we opened the log
@@ -369,7 +369,7 @@ static std::string LogTimestampStr(const std::string &str, std::atomic_bool *fSt
 
 int LogPrintStr(const std::string &str, bool useVMLog)
 {
-//////////////////////////////// // marbellachain
+//////////////////////////////// // mchain
     FILE* file = fileout;
     if(useVMLog){
         file = fileoutVM;
@@ -615,13 +615,13 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 
 fs::path GetDefaultDataDir()
 {
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\MarbellaChain
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\MarbellaChain
-    // Mac: ~/Library/Application Support/MarbellaChain
-    // Unix: ~/.marbellachain
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\Mchain
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\Mchain
+    // Mac: ~/Library/Application Support/Mchain
+    // Unix: ~/.mchain
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "MarbellaChain";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Mchain";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -631,10 +631,10 @@ fs::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    return pathRet / "Library/Application Support/MarbellaChain";
+    return pathRet / "Library/Application Support/Mchain";
 #else
     // Unix
-    return pathRet / ".marbellachain";
+    return pathRet / ".mchain";
 #endif
 #endif
 }
@@ -986,8 +986,8 @@ std::string CopyrightHolders(const std::string& strPrefix)
     std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
 
     // Check for untranslated substitution to make sure Bitcoin Core copyright is not removed by accident
-    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("MarbellaChain Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The MarbellaChain Core developers";
+    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Mchain Core") == std::string::npos) {
+        strCopyrightHolders += "\n" + strPrefix + "The Mchain Core developers";
     }
     return strCopyrightHolders;
 }

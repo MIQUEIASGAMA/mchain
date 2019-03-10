@@ -133,46 +133,46 @@ BASE_SCRIPTS= [
     # Don't append tests at the end to avoid merge conflicts
     # Put them in a random line within the section that fits their approximate run-time
 
-    # marbellachain
-    'marbellachain_dgp.py',
-    'marbellachain_pos.py',
-    'marbellachain_opcall.py',
-    'marbellachain_opcreate.py',
-    'marbellachain_8mb_block.py',
-    'marbellachain_gas_limit.py',
-    'marbellachain_searchlog.py',
-    'marbellachain_pos_segwit.py',
-    'marbellachain_state_root.py',
-    'marbellachain_evm_globals.py',
-    'marbellachain_null_sender.py',
-    'marbellachain_waitforlogs.py',
-    'marbellachain_block_header.py',
-    'marbellachain_callcontract.py',
-    'marbellachain_spend_op_call.py',
-    'marbellachain_condensing_txs.py',
-    'marbellachain_createcontract.py',
-    'marbellachain_sendtocontract.py',
-    'marbellachain_identical_refunds.py',
-    'marbellachain_create_eth_op_code.py',
-    'marbellachain_gas_limit_overflow.py',
-    'marbellachain_call_empty_contract.py',
-    'marbellachain_dgp_block_size_sync.py',
-    'marbellachain_pos_conflicting_txs.py',
-    'marbellachain_globals_state_changer.py',
-    'marbellachain_no_exec_call_disabled.py',
-    'marbellachain_soft_block_gas_limits.py',
-    'marbellachain_dgp_block_size_restart.py',
-    'marbellachain_searchlog_restart_node.py',
-    'marbellachain_immature_coinstake_spend.py',
-    'marbellachain_transaction_prioritization.py',
-    'marbellachain_assign_mpos_fees_to_gas_refund.py',
-    'marbellachain_ignore_mpos_participant_reward.py',
-    'marbellachain_many_value_refunds_from_same_tx.py',
-    'marbellachain_combined_outputs_exceed_gas_limit.py',
-    'marbellachain_dgp_gas_price_lingering_mempool_tx.py',
-    'marbellachain_header_spam.py',
-    'marbellachain_divergence_dos.py',
-    'marbellachain_prioritize_create_over_call.py'
+    # mchain
+    'mchain_dgp.py',
+    'mchain_pos.py',
+    'mchain_opcall.py',
+    'mchain_opcreate.py',
+    'mchain_8mb_block.py',
+    'mchain_gas_limit.py',
+    'mchain_searchlog.py',
+    'mchain_pos_segwit.py',
+    'mchain_state_root.py',
+    'mchain_evm_globals.py',
+    'mchain_null_sender.py',
+    'mchain_waitforlogs.py',
+    'mchain_block_header.py',
+    'mchain_callcontract.py',
+    'mchain_spend_op_call.py',
+    'mchain_condensing_txs.py',
+    'mchain_createcontract.py',
+    'mchain_sendtocontract.py',
+    'mchain_identical_refunds.py',
+    'mchain_create_eth_op_code.py',
+    'mchain_gas_limit_overflow.py',
+    'mchain_call_empty_contract.py',
+    'mchain_dgp_block_size_sync.py',
+    'mchain_pos_conflicting_txs.py',
+    'mchain_globals_state_changer.py',
+    'mchain_no_exec_call_disabled.py',
+    'mchain_soft_block_gas_limits.py',
+    'mchain_dgp_block_size_restart.py',
+    'mchain_searchlog_restart_node.py',
+    'mchain_immature_coinstake_spend.py',
+    'mchain_transaction_prioritization.py',
+    'mchain_assign_mpos_fees_to_gas_refund.py',
+    'mchain_ignore_mpos_participant_reward.py',
+    'mchain_many_value_refunds_from_same_tx.py',
+    'mchain_combined_outputs_exceed_gas_limit.py',
+    'mchain_dgp_gas_price_lingering_mempool_tx.py',
+    'mchain_header_spam.py',
+    'mchain_divergence_dos.py',
+    'mchain_prioritize_create_over_call.py'
 ]
 
 EXTENDED_SCRIPTS = [
@@ -201,7 +201,7 @@ EXTENDED_SCRIPTS = [
     'feature_notifications.py',
     'rpc_invalidateblock.py',
     'feature_rbf.py',
-    # Version <4 blocks are never allowed in regtest on marbellachain
+    # Version <4 blocks are never allowed in regtest on mchain
     'p2p_unrequested_blocks.py',
     'feature_dersig.py',
     'feature_cltv.py'
@@ -324,8 +324,8 @@ def main():
 def run_tests(test_list, src_dir, build_dir, exeext, tmpdir, jobs=1, enable_coverage=False, args=[], combined_logs_len=0):
     # Warn if bitcoind is already running (unix only)
     try:
-        if subprocess.check_output(["pidof", "marbellachaind"]) is not None:
-            print("%sWARNING!%s There is already a marbellachaind process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
+        if subprocess.check_output(["pidof", "mchaind"]) is not None:
+            print("%sWARNING!%s There is already a mchaind process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
     except (OSError, subprocess.SubprocessError):
         pass
 
@@ -336,8 +336,8 @@ def run_tests(test_list, src_dir, build_dir, exeext, tmpdir, jobs=1, enable_cove
 
     #Set env vars
     if "BITCOIND" not in os.environ:
-        os.environ["BITCOIND"] = build_dir + '/src/marbellachaind' + exeext
-        os.environ["BITCOINCLI"] = build_dir + '/src/marbellachain-cli' + exeext
+        os.environ["BITCOIND"] = build_dir + '/src/mchaind' + exeext
+        os.environ["BITCOINCLI"] = build_dir + '/src/mchain-cli' + exeext
 
     tests_dir = src_dir + '/test/functional/'
 
@@ -522,7 +522,7 @@ def check_script_prefixes():
     # convention don't immediately cause the tests to fail.
     LEEWAY = 10
 
-    good_prefixes_re = re.compile("(example|feature|interface|mempool|mining|p2p|rpc|wallet|marbellachain)_")
+    good_prefixes_re = re.compile("(example|feature|interface|mempool|mining|p2p|rpc|wallet|mchain)_")
     bad_script_names = [script for script in ALL_SCRIPTS if good_prefixes_re.match(script) is None]
 
     if len(bad_script_names) > 0:

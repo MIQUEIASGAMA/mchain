@@ -126,7 +126,7 @@
         <translation>Оношилгоо ба засварын консолыг онгойлго</translation>
     </message>
     <message>
-        <source>MarbellaChain</source>
+        <source>Mchain</source>
         <translation>Биткойн</translation>
     </message>
     <message>
@@ -233,7 +233,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>MarbellaChain</source>
+        <source>Mchain</source>
         <translation>Биткойн</translation>
     </message>
     <message>
@@ -558,7 +558,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>marbellachain-core</name>
+    <name>mchain-core</name>
     <message>
         <source>Options:</source>
         <translation>Сонголтууд:</translation>

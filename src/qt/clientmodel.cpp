@@ -211,9 +211,9 @@ void ClientModel::getGasInfo(uint64_t& blockGasLimit, uint64_t& minGasPrice, uin
 {
     LOCK(cs_main);
 
-    MarbellaChainDGP marbellachainDGP(globalState.get(), fGettingValuesDGP);
-    blockGasLimit = marbellachainDGP.getBlockGasLimit(chainActive.Height());
-    minGasPrice = CAmount(marbellachainDGP.getMinGasPrice(chainActive.Height()));
+    MchainDGP mchainDGP(globalState.get(), fGettingValuesDGP);
+    blockGasLimit = mchainDGP.getBlockGasLimit(chainActive.Height());
+    minGasPrice = CAmount(mchainDGP.getMinGasPrice(chainActive.Height()));
     nGasPrice = (minGasPrice>DEFAULT_GAS_PRICE)?minGasPrice:DEFAULT_GAS_PRICE;
 }
 

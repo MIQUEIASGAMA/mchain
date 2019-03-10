@@ -79,13 +79,13 @@ TestingSetup::TestingSetup(const std::string& chainName) : BasicTestingSetup(cha
         pcoinsdbview.reset(new CCoinsViewDB(1 << 23, true));
         pcoinsTip.reset(new CCoinsViewCache(pcoinsdbview.get()));
 
-////////////////////////////////////////////////////////////// marbellachain
+////////////////////////////////////////////////////////////// mchain
         dev::eth::Ethash::init();		
         boost::filesystem::path pathTemp = fs::temp_directory_path() / strprintf("test_bitcoin_%lu_%i", (unsigned long)GetTime(), (int)(GetRand(100000)));
         boost::filesystem::create_directories(pathTemp);
         const dev::h256 hashDB(dev::sha3(dev::rlp("")));
-        globalState = std::unique_ptr<MarbellaChainState>(new MarbellaChainState(dev::u256(0), MarbellaChainState::openDB(pathTemp.string(), hashDB, dev::WithExisting::Trust), pathTemp.string(), dev::eth::BaseState::Empty));
-        dev::eth::ChainParams cp((dev::eth::genesisInfo(dev::eth::Network::marbellachainTestNetwork)));
+        globalState = std::unique_ptr<MchainState>(new MchainState(dev::u256(0), MchainState::openDB(pathTemp.string(), hashDB, dev::WithExisting::Trust), pathTemp.string(), dev::eth::BaseState::Empty));
+        dev::eth::ChainParams cp((dev::eth::genesisInfo(dev::eth::Network::mchainTestNetwork)));
         globalSealEngine = std::unique_ptr<dev::eth::SealEngineFace>(cp.createSealEngine());
         globalState->populateFrom(cp.genesisState);
         globalState->setRootUTXO(uintToh256(chainparams.GenesisBlock().hashUTXORoot));
@@ -124,7 +124,7 @@ TestingSetup::~TestingSetup()
         pcoinsdbview.reset();
         pblocktree.reset();
 
-/////////////////////////////////////////////// // marbellachain
+/////////////////////////////////////////////// // mchain
         delete globalState.release();
         globalSealEngine.reset();
 ///////////////////////////////////////////////

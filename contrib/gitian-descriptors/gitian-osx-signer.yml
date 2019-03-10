@@ -1,5 +1,5 @@
 ---
-name: "marbellachain-dmg-signer"
+name: "mchain-dmg-signer"
 suites:
 - "bionic"
 architectures:
@@ -7,10 +7,10 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/marbellachain/marbellachain-detached-sigs.git"
+- "url": "https://github.com/mchainnetwork/mchain-detached-sigs.git"
   "dir": "signature"
 files:
-- "marbellachain-osx-unsigned.tar.gz"
+- "mchain-osx-unsigned.tar.gz"
 script: |
   WRAP_DIR=$HOME/wrapped
   mkdir -p ${WRAP_DIR}
@@ -27,8 +27,8 @@ script: |
     chmod +x ${WRAP_DIR}/${prog}
   done
 
-  UNSIGNED=marbellachain-osx-unsigned.tar.gz
-  SIGNED=marbellachain-osx-signed.dmg
+  UNSIGNED=mchain-osx-unsigned.tar.gz
+  SIGNED=mchain-osx-signed.dmg
 
   tar -xf ${UNSIGNED}
   OSX_VOLNAME="$(cat osx_volname)"

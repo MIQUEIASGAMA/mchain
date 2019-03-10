@@ -54,7 +54,7 @@
 #include <boost/thread.hpp>
 
 #if defined(NDEBUG)
-# error "MarbellaChain cannot be compiled without assertions."
+# error "Mchain cannot be compiled without assertions."
 #endif
 
 #define MICRO 0.000001
@@ -64,13 +64,13 @@
  * Global state
  */
 
- ////////////////////////////// marbellachain
+ ////////////////////////////// mchain
 #include <iostream>
 #include <bitset>
 #include "pubkey.h"
 #include <univalue.h>
 
-std::unique_ptr<MarbellaChainState> globalState;
+std::unique_ptr<MchainState> globalState;
 std::shared_ptr<dev::eth::SealEngineFace> globalSealEngine;
 bool fRecordLogOpcodes = false;
 bool fIsVMlogFile = false;
@@ -255,7 +255,7 @@ CTxMemPool mempool(&feeEstimator);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const std::string strMessageMagic = "MarbellaChain Signed Message:\n";
+const std::string strMessageMagic = "Mchain Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -726,31 +726,31 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
 
         dev::u256 txMinGasPrice = 0;
 
-        //////////////////////////////////////////////////////////// // marbellachain
+        //////////////////////////////////////////////////////////// // mchain
         if(tx.HasCreateOrCall()){
 
             if(!CheckSenderScript(view, tx)){
                 return state.DoS(1, false, REJECT_INVALID, "bad-txns-invalid-sender-script");
             }
 
-            MarbellaChainDGP marbellachainDGP(globalState.get(), fGettingValuesDGP);
-            uint64_t minGasPrice = marbellachainDGP.getMinGasPrice(chainActive.Tip()->nHeight + 1);
-            uint64_t blockGasLimit = marbellachainDGP.getBlockGasLimit(chainActive.Tip()->nHeight + 1);
+            MchainDGP mchainDGP(globalState.get(), fGettingValuesDGP);
+            uint64_t minGasPrice = mchainDGP.getMinGasPrice(chainActive.Tip()->nHeight + 1);
+            uint64_t blockGasLimit = mchainDGP.getBlockGasLimit(chainActive.Tip()->nHeight + 1);
             size_t count = 0;
             for(const CTxOut& o : tx.vout)
                 count += o.scriptPubKey.HasOpCreate() || o.scriptPubKey.HasOpCall() ? 1 : 0;
-            MarbellaChainTxConverter converter(tx, NULL);
-            ExtractMarbellaChainTX resultConverter;
-            if(!converter.extractionMarbellaChainTransactions(resultConverter)){
+            MchainTxConverter converter(tx, NULL);
+            ExtractMchainTX resultConverter;
+            if(!converter.extractionMchainTransactions(resultConverter)){
                 return state.DoS(100, error("AcceptToMempool(): Contract transaction of the wrong format"), REJECT_INVALID, "bad-tx-bad-contract-format");
             }
-            std::vector<MarbellaChainTransaction> marbellachainTransactions = resultConverter.first;
-            std::vector<EthTransactionParams> marbellachainETP = resultConverter.second;
+            std::vector<MchainTransaction> mchainTransactions = resultConverter.first;
+            std::vector<EthTransactionParams> mchainETP = resultConverter.second;
 
             dev::u256 sumGas = dev::u256(0);
             dev::u256 gasAllTxs = dev::u256(0);
-            for(MarbellaChainTransaction marbellachainTransaction : marbellachainTransactions){
-                sumGas += marbellachainTransaction.gas() * marbellachainTransaction.gasPrice();
+            for(MchainTransaction mchainTransaction : mchainTransactions){
+                sumGas += mchainTransaction.gas() * mchainTransaction.gasPrice();
 
                 if(sumGas > dev::u256(INT64_MAX)) {
                     return state.DoS(100, error("AcceptToMempool(): Transaction's gas stipend overflows"), REJECT_INVALID, "bad-tx-gas-stipend-overflow");
@@ -761,11 +761,11 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
                 }
 
                 if(txMinGasPrice != 0) {
-                    txMinGasPrice = std::min(txMinGasPrice, marbellachainTransaction.gasPrice());
+                    txMinGasPrice = std::min(txMinGasPrice, mchainTransaction.gasPrice());
                 } else {
-                    txMinGasPrice = marbellachainTransaction.gasPrice();
+                    txMinGasPrice = mchainTransaction.gasPrice();
                 }
-                VersionVM v = marbellachainTransaction.getVersion();
+                VersionVM v = mchainTransaction.getVersion();
                 if(v.format!=0)
                     return state.DoS(100, error("AcceptToMempool(): Contract execution uses unknown version format"), REJECT_INVALID, "bad-tx-version-format");
                 if(v.rootVM != 1)
@@ -776,29 +776,29 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
                     return state.DoS(100, error("AcceptToMempool(): Contract execution uses unknown flag options"), REJECT_INVALID, "bad-tx-version-flags");
 
                 //check gas limit is not less than minimum mempool gas limit
-                if(marbellachainTransaction.gas() < gArgs.GetArg("-minmempoolgaslimit", MEMPOOL_MIN_GAS_LIMIT))
+                if(mchainTransaction.gas() < gArgs.GetArg("-minmempoolgaslimit", MEMPOOL_MIN_GAS_LIMIT))
                     return state.DoS(100, error("AcceptToMempool(): Contract execution has lower gas limit than allowed to accept into mempool"), REJECT_INVALID, "bad-tx-too-little-mempool-gas");
 
                 //check gas limit is not less than minimum gas limit (unless it is a no-exec tx)
-                if(marbellachainTransaction.gas() < MINIMUM_GAS_LIMIT && v.rootVM != 0)
+                if(mchainTransaction.gas() < MINIMUM_GAS_LIMIT && v.rootVM != 0)
                     return state.DoS(100, error("AcceptToMempool(): Contract execution has lower gas limit than allowed"), REJECT_INVALID, "bad-tx-too-little-gas");
 
-                if(marbellachainTransaction.gas() > UINT32_MAX)
+                if(mchainTransaction.gas() > UINT32_MAX)
                     return state.DoS(100, error("AcceptToMempool(): Contract execution can not specify greater gas limit than can fit in 32-bits"), REJECT_INVALID, "bad-tx-too-much-gas");
 
-                gasAllTxs += marbellachainTransaction.gas();
+                gasAllTxs += mchainTransaction.gas();
                 if(gasAllTxs > dev::u256(blockGasLimit))
                     return state.DoS(1, false, REJECT_INVALID, "bad-txns-gas-exceeds-blockgaslimit");
 
                 //don't allow less than DGP set minimum gas price to prevent MPoS greedy mining/spammers
-                if(v.rootVM!=0 && (uint64_t)marbellachainTransaction.gasPrice() < minGasPrice)
+                if(v.rootVM!=0 && (uint64_t)mchainTransaction.gasPrice() < minGasPrice)
                     return state.DoS(100, error("AcceptToMempool(): Contract execution has lower gas price than allowed"), REJECT_INVALID, "bad-tx-low-gas-price");
             }
 
-            if(!CheckMinGasPrice(marbellachainETP, minGasPrice))
+            if(!CheckMinGasPrice(mchainETP, minGasPrice))
                 return state.DoS(100, false, REJECT_INVALID, "bad-txns-small-gasprice");
 
-            if(count > marbellachainTransactions.size())
+            if(count > mchainTransactions.size())
                 return state.DoS(100, false, REJECT_INVALID, "bad-txns-incorrect-format");
 
             if (rawTx && nAbsurdFee && dev::u256(nFees) > dev::u256(nAbsurdFee) + sumGas)
@@ -1063,7 +1063,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         // Remove conflicting transactions from the mempool
         for (const CTxMemPool::txiter it : allConflicting)
         {
-            LogPrint(BCLog::MEMPOOL, "replacing tx %s with %s for %s MARBELLACHAIN additional fees, %d delta bytes\n",
+            LogPrint(BCLog::MEMPOOL, "replacing tx %s with %s for %s MCHAIN additional fees, %d delta bytes\n",
                     it->GetTx().GetHash().ToString(),
                     hash.ToString(),
                     FormatMoney(nModifiedFees - nConflictingFees),
@@ -1842,8 +1842,8 @@ DisconnectResult CChainState::DisconnectBlock(const CBlock& block, const CBlockI
     // move best block pointer to prevout block
     view.SetBestBlock(pindex->pprev->GetBlockHash());
 
-    globalState->setRoot(uintToh256(pindex->pprev->hashStateRoot)); // marbellachain
-    globalState->setRootUTXO(uintToh256(pindex->pprev->hashUTXORoot)); // marbellachain
+    globalState->setRoot(uintToh256(pindex->pprev->hashStateRoot)); // mchain
+    globalState->setRootUTXO(uintToh256(pindex->pprev->hashUTXORoot)); // mchain
 
     if(pfClean == NULL && fLogEvents){
         pstorageresult->deleteResults(block.vtx);
@@ -2015,7 +2015,7 @@ static int64_t nTimeCallbacks = 0;
 static int64_t nTimeTotal = 0;
 static int64_t nBlocksTotal = 0;
 
-/////////////////////////////////////////////////////////////////////// marbellachain
+/////////////////////////////////////////////////////////////////////// mchain
 bool CheckSenderScript(const CCoinsViewCache& view, const CTransaction& tx){
     CScript script = view.AccessCoin(tx.vin[0].prevout).out.scriptPubKey;
     if(!script.IsPayToPubkeyHash() && !script.IsPayToPubkey()){
@@ -2028,8 +2028,8 @@ std::vector<ResultExecute> CallContract(const dev::Address& addrContract, std::v
     CBlock block;
     CMutableTransaction tx;
 
-    MarbellaChainDGP marbellachainDGP(globalState.get(), fGettingValuesDGP);
-    uint64_t blockGasLimit = marbellachainDGP.getBlockGasLimit(chainActive.Tip()->nHeight + 1);
+    MchainDGP mchainDGP(globalState.get(), fGettingValuesDGP);
+    uint64_t blockGasLimit = mchainDGP.getBlockGasLimit(chainActive.Tip()->nHeight + 1);
 
     if(gasLimit == 0){
         gasLimit = blockGasLimit - 1;
@@ -2038,12 +2038,12 @@ std::vector<ResultExecute> CallContract(const dev::Address& addrContract, std::v
     tx.vout.push_back(CTxOut(0, CScript() << OP_DUP << OP_HASH160 << senderAddress.asBytes() << OP_EQUALVERIFY << OP_CHECKSIG));
     block.vtx.push_back(MakeTransactionRef(CTransaction(tx)));
  
-    MarbellaChainTransaction callTransaction(0, 1, dev::u256(gasLimit), addrContract, opcode, dev::u256(0));
+    MchainTransaction callTransaction(0, 1, dev::u256(gasLimit), addrContract, opcode, dev::u256(0));
     callTransaction.forceSender(senderAddress);
     callTransaction.setVersion(VersionVM::GetEVMDefault());
 
     
-    ByteCodeExec exec(block, std::vector<MarbellaChainTransaction>(1, callTransaction), blockGasLimit);
+    ByteCodeExec exec(block, std::vector<MchainTransaction>(1, callTransaction), blockGasLimit);
     exec.performByteCode(dev::eth::Permanence::Reverted);
     return exec.getResult();
 }
@@ -2213,12 +2213,12 @@ UniValue vmLogToJSON(const ResultExecute& execRes, const CTransaction& tx, const
 }
 
 void writeVMlog(const std::vector<ResultExecute>& res, const CTransaction& tx, const CBlock& block){
-    boost::filesystem::path marbellachainDir = GetDataDir() / "vmExecLogs.json";
+    boost::filesystem::path mchainDir = GetDataDir() / "vmExecLogs.json";
     std::stringstream ss;
     if(fIsVMlogFile){
         ss << ",";
     } else {
-        std::ofstream file(marbellachainDir.string(), std::ios::out | std::ios::app);
+        std::ofstream file(mchainDir.string(), std::ios::out | std::ios::app);
         file << "{\"logs\":[]}";
         file.close();
     }
@@ -2232,7 +2232,7 @@ void writeVMlog(const std::vector<ResultExecute>& res, const CTransaction& tx, c
         }
     }
     
-    std::ofstream file(marbellachainDir.string(), std::ios::in | std::ios::out);
+    std::ofstream file(mchainDir.string(), std::ios::in | std::ios::out);
     file.seekp(-2, std::ios::end);
     file << ss.str();
     file.close();
@@ -2240,7 +2240,7 @@ void writeVMlog(const std::vector<ResultExecute>& res, const CTransaction& tx, c
 }
 
 bool ByteCodeExec::performByteCode(dev::eth::Permanence type){
-    for(MarbellaChainTransaction& tx : txs){
+    for(MchainTransaction& tx : txs){
         //validate VM version
         if(tx.getVersion().toRaw() != VersionVM::GetEVMDefault().toRaw()){
             return false;
@@ -2339,8 +2339,8 @@ dev::Address ByteCodeExec::EthAddrFromScript(const CScript& script){
     return dev::Address();
 }
 
-bool MarbellaChainTxConverter::extractionMarbellaChainTransactions(ExtractMarbellaChainTX& marbellachaintx){
-    std::vector<MarbellaChainTransaction> resultTX;
+bool MchainTxConverter::extractionMchainTransactions(ExtractMchainTX& mchaintx){
+    std::vector<MchainTransaction> resultTX;
     std::vector<EthTransactionParams> resultETP;
     for(size_t i = 0; i < txBit.vout.size(); i++){
         if(txBit.vout[i].scriptPubKey.HasOpCreate() || txBit.vout[i].scriptPubKey.HasOpCall()){
@@ -2357,11 +2357,11 @@ bool MarbellaChainTxConverter::extractionMarbellaChainTransactions(ExtractMarbel
             }
         }
     }
-    marbellachaintx = std::make_pair(resultTX, resultETP);
+    mchaintx = std::make_pair(resultTX, resultETP);
     return true;
 }
 
-bool MarbellaChainTxConverter::receiveStack(const CScript& scriptPubKey){
+bool MchainTxConverter::receiveStack(const CScript& scriptPubKey){
     EvalScript(stack, scriptPubKey, SCRIPT_EXEC_BYTE_CODE, BaseSignatureChecker(), SIGVERSION_BASE, nullptr);
     if (stack.empty())
         return false;
@@ -2378,7 +2378,7 @@ bool MarbellaChainTxConverter::receiveStack(const CScript& scriptPubKey){
     return true;
 }
 
-bool MarbellaChainTxConverter::parseEthTXParams(EthTransactionParams& params){
+bool MchainTxConverter::parseEthTXParams(EthTransactionParams& params){
     try{
         dev::Address receiveAddress;
         valtype vecAddr;
@@ -2426,13 +2426,13 @@ bool MarbellaChainTxConverter::parseEthTXParams(EthTransactionParams& params){
     }
 }
 
-MarbellaChainTransaction MarbellaChainTxConverter::createEthTX(const EthTransactionParams& etp, uint32_t nOut){
-    MarbellaChainTransaction txEth;
+MchainTransaction MchainTxConverter::createEthTX(const EthTransactionParams& etp, uint32_t nOut){
+    MchainTransaction txEth;
     if (etp.receiveAddress == dev::Address() && opcode != OP_CALL){
-        txEth = MarbellaChainTransaction(txBit.vout[nOut].nValue, etp.gasPrice, etp.gasLimit, etp.code, dev::u256(0));
+        txEth = MchainTransaction(txBit.vout[nOut].nValue, etp.gasPrice, etp.gasLimit, etp.code, dev::u256(0));
     }
     else{
-        txEth = MarbellaChainTransaction(txBit.vout[nOut].nValue, etp.gasPrice, etp.gasLimit, etp.receiveAddress, etp.code, dev::u256(0));
+        txEth = MchainTransaction(txBit.vout[nOut].nValue, etp.gasPrice, etp.gasLimit, etp.receiveAddress, etp.code, dev::u256(0));
     }
     dev::Address sender(GetSenderAddress(txBit, view, blockTransactions));
     txEth.forceSender(sender);
@@ -2457,12 +2457,12 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
            (*pindex->phashBlock == block.GetHash()));
     int64_t nTimeStart = GetTimeMicros();
 
-    ///////////////////////////////////////////////// // marbellachain
-    MarbellaChainDGP marbellachainDGP(globalState.get(), fGettingValuesDGP);
-    globalSealEngine->setMarbellaChainSchedule(marbellachainDGP.getGasSchedule(pindex->nHeight + 1));
-    uint32_t sizeBlockDGP = marbellachainDGP.getBlockSize(pindex->nHeight + 1);
-    uint64_t minGasPrice = marbellachainDGP.getMinGasPrice(pindex->nHeight + 1);
-    uint64_t blockGasLimit = marbellachainDGP.getBlockGasLimit(pindex->nHeight + 1);
+    ///////////////////////////////////////////////// // mchain
+    MchainDGP mchainDGP(globalState.get(), fGettingValuesDGP);
+    globalSealEngine->setMchainSchedule(mchainDGP.getGasSchedule(pindex->nHeight + 1));
+    uint32_t sizeBlockDGP = mchainDGP.getBlockSize(pindex->nHeight + 1);
+    uint64_t minGasPrice = mchainDGP.getMinGasPrice(pindex->nHeight + 1);
+    uint64_t blockGasLimit = mchainDGP.getBlockGasLimit(pindex->nHeight + 1);
     dgpMaxBlockSize = sizeBlockDGP ? sizeBlockDGP : dgpMaxBlockSize;
     updateBlockSizeParams(dgpMaxBlockSize);
     CBlock checkBlock(block.GetBlockHeader());
@@ -2472,7 +2472,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     /////////////////////////////////////////////////
 
     // Move this check from CheckBlock to ConnectBlock as it depends on DGP values
-    if (block.vtx.empty() || block.vtx.size() > dgpMaxBlockSize || ::GetSerializeSize(block, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) > dgpMaxBlockSize) // marbellachain
+    if (block.vtx.empty() || block.vtx.size() > dgpMaxBlockSize || ::GetSerializeSize(block, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) > dgpMaxBlockSize) // mchain
         return state.DoS(100, false, REJECT_INVALID, "bad-blk-length", false, "size limits failed");
 
     // Move this check from ContextualCheckBlock to ConnectBlock as it depends on DGP values
@@ -2602,7 +2602,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     int64_t nSigOpsCost = 0;
     blockundo.vtxundo.reserve(block.vtx.size() - 1);
 
-    ///////////////////////////////////////////////////////// // marbellachain
+    ///////////////////////////////////////////////////////// // mchain
     std::map<dev::Address, std::pair<CHeightTxIndexKey, std::vector<uint256>>> heightIndexes;
     /////////////////////////////////////////////////////////
 
@@ -2692,7 +2692,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
             nValueOut += nTxValueOut;
         }
 
-///////////////////////////////////////////////////////////////////////////////////////// marbellachain
+///////////////////////////////////////////////////////////////////////////////////////// mchain
         if(!tx.HasOpSpend()){
             checkBlock.vtx.push_back(block.vtx[i]);
         }
@@ -2702,25 +2702,25 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
                 return state.DoS(100, false, REJECT_INVALID, "bad-txns-invalid-sender-script");
             }
 
-            MarbellaChainTxConverter convert(tx, &view, &block.vtx);
+            MchainTxConverter convert(tx, &view, &block.vtx);
 
-            ExtractMarbellaChainTX resultConvertMarbellaChainTX;
-            if(!convert.extractionMarbellaChainTransactions(resultConvertMarbellaChainTX)){
+            ExtractMchainTX resultConvertMchainTX;
+            if(!convert.extractionMchainTransactions(resultConvertMchainTX)){
                 return state.DoS(100, error("ConnectBlock(): Contract transaction of the wrong format"), REJECT_INVALID, "bad-tx-bad-contract-format");
             }
-            if(!CheckMinGasPrice(resultConvertMarbellaChainTX.second, minGasPrice))
+            if(!CheckMinGasPrice(resultConvertMchainTX.second, minGasPrice))
                 return state.DoS(100, error("ConnectBlock(): Contract execution has lower gas price than allowed"), REJECT_INVALID, "bad-tx-low-gas-price");
 
 
             dev::u256 gasAllTxs = dev::u256(0);
-            ByteCodeExec exec(block, resultConvertMarbellaChainTX.first, blockGasLimit);
+            ByteCodeExec exec(block, resultConvertMchainTX.first, blockGasLimit);
             //validate VM version and other ETH params before execution
             //Reject anything unknown (could be changed later by DGP)
             //TODO evaluate if this should be relaxed for soft-fork purposes
             bool nonZeroVersion=false;
             dev::u256 sumGas = dev::u256(0);
             CAmount nTxFee = view.GetValueIn(tx)-tx.GetValueOut();
-            for(MarbellaChainTransaction& qtx : resultConvertMarbellaChainTX.first){
+            for(MchainTransaction& qtx : resultConvertMchainTX.first){
                 sumGas += qtx.gas() * qtx.gasPrice();
 
                 if(sumGas > dev::u256(INT64_MAX)) {
@@ -2786,13 +2786,13 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
             std::vector<TransactionReceiptInfo> tri;
             if (fLogEvents && !fJustCheck)
             {
-                for(size_t k = 0; k < resultConvertMarbellaChainTX.first.size(); k ++){
+                for(size_t k = 0; k < resultConvertMchainTX.first.size(); k ++){
                     dev::Address key = resultExec[k].execRes.newAddress;
                     if(!heightIndexes.count(key)){
                         heightIndexes[key].first = CHeightTxIndexKey(pindex->nHeight, resultExec[k].execRes.newAddress);
                     }
                     heightIndexes[key].second.push_back(tx.GetHash());
-                    tri.push_back(TransactionReceiptInfo{block.GetHash(), uint32_t(pindex->nHeight), tx.GetHash(), uint32_t(i), resultConvertMarbellaChainTX.first[k].from(), resultConvertMarbellaChainTX.first[k].to(),
+                    tri.push_back(TransactionReceiptInfo{block.GetHash(), uint32_t(pindex->nHeight), tx.GetHash(), uint32_t(i), resultConvertMchainTX.first[k].from(), resultConvertMchainTX.first[k].to(),
                                 countCumulativeGasUsed, uint64_t(resultExec[k].execRes.gasUsed), resultExec[k].execRes.newAddress, resultExec[k].txRec.log(), resultExec[k].execRes.excepted});
                 }
 
@@ -2841,7 +2841,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     int64_t nTime4 = GetTimeMicros(); nTimeVerify += nTime4 - nTime2;
     LogPrint(BCLog::BENCH, "    - Verify %u txins: %.2fms (%.3fms/txin) [%.2fs (%.2fms/blk)]\n", nInputs - 1, MILLI * (nTime4 - nTime2), nInputs <= 1 ? 0 : MILLI * (nTime4 - nTime2) / (nInputs-1), nTimeVerify * MICRO, nTimeVerify * MILLI / nBlocksTotal);
 
-////////////////////////////////////////////////////////////////// // marbellachain
+////////////////////////////////////////////////////////////////// // mchain
     checkBlock.hashMerkleRoot = BlockMerkleRoot(checkBlock);
     checkBlock.hashStateRoot = h256Touint(globalState->rootHash());
     checkBlock.hashUTXORoot = h256Touint(globalState->rootHashUTXO());
@@ -3318,8 +3318,8 @@ bool CChainState::ConnectTip(CValidationState& state, const CChainParams& chainp
     {
         CCoinsViewCache view(pcoinsTip.get());
 
-        dev::h256 oldHashStateRoot(globalState->rootHash()); // marbellachain
-        dev::h256 oldHashUTXORoot(globalState->rootHashUTXO()); // marbellachain
+        dev::h256 oldHashStateRoot(globalState->rootHash()); // mchain
+        dev::h256 oldHashUTXORoot(globalState->rootHashUTXO()); // mchain
 
         bool rv = ConnectBlock(blockConnecting, state, pindexNew, view, chainparams);
         GetMainSignals().BlockChecked(blockConnecting, state);
@@ -3327,8 +3327,8 @@ bool CChainState::ConnectTip(CValidationState& state, const CChainParams& chainp
             if (state.IsInvalid())
                 InvalidBlockFound(pindexNew, state);
 
-            globalState->setRoot(oldHashStateRoot); // marbellachain
-            globalState->setRootUTXO(oldHashUTXORoot); // marbellachain
+            globalState->setRoot(oldHashStateRoot); // mchain
+            globalState->setRootUTXO(oldHashUTXORoot); // mchain
             pstorageresult->clearCacheResult();
             return error("ConnectTip(): ConnectBlock %s failed", pindexNew->GetBlockHash().ToString());
         }
@@ -4773,13 +4773,13 @@ bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams,
     if (!ContextualCheckBlock(block, state, chainparams.GetConsensus(), pindexPrev))
         return error("%s: Consensus::ContextualCheckBlock: %s", __func__, FormatStateMessage(state));
 
-    dev::h256 oldHashStateRoot(globalState->rootHash()); // marbellachain
-    dev::h256 oldHashUTXORoot(globalState->rootHashUTXO()); // marbellachain
+    dev::h256 oldHashStateRoot(globalState->rootHash()); // mchain
+    dev::h256 oldHashUTXORoot(globalState->rootHashUTXO()); // mchain
     
     if (!g_chainstate.ConnectBlock(block, state, &indexDummy, viewNew, chainparams, true)){
         
-        globalState->setRoot(oldHashStateRoot); // marbellachain
-        globalState->setRootUTXO(oldHashUTXORoot); // marbellachain
+        globalState->setRoot(oldHashStateRoot); // mchain
+        globalState->setRootUTXO(oldHashUTXORoot); // mchain
         pstorageresult->clearCacheResult();
         return false;
     }
@@ -5177,10 +5177,10 @@ bool CVerifyDB::VerifyDB(const CChainParams& chainparams, CCoinsView *coinsview,
     CValidationState state;
     int reportDone = 0;
 
-////////////////////////////////////////////////////////////////////////// // marbellachain
+////////////////////////////////////////////////////////////////////////// // mchain
     dev::h256 oldHashStateRoot(globalState->rootHash());
     dev::h256 oldHashUTXORoot(globalState->rootHashUTXO());
-    MarbellaChainDGP marbellachainDGP(globalState.get(), fGettingValuesDGP);
+    MchainDGP mchainDGP(globalState.get(), fGettingValuesDGP);
 //////////////////////////////////////////////////////////////////////////
 
     LogPrintf("[0%%]...");
@@ -5202,8 +5202,8 @@ bool CVerifyDB::VerifyDB(const CChainParams& chainparams, CCoinsView *coinsview,
             break;
         }
 
-        ///////////////////////////////////////////////////////////////////// // marbellachain
-        uint32_t sizeBlockDGP = marbellachainDGP.getBlockSize(pindex->nHeight);
+        ///////////////////////////////////////////////////////////////////// // mchain
+        uint32_t sizeBlockDGP = mchainDGP.getBlockSize(pindex->nHeight);
         dgpMaxBlockSize = sizeBlockDGP ? sizeBlockDGP : dgpMaxBlockSize;
         updateBlockSizeParams(dgpMaxBlockSize);
         /////////////////////////////////////////////////////////////////////
@@ -5258,20 +5258,20 @@ bool CVerifyDB::VerifyDB(const CChainParams& chainparams, CCoinsView *coinsview,
             if (!ReadBlockFromDisk(block, pindex, chainparams.GetConsensus()))
                 return error("VerifyDB(): *** ReadBlockFromDisk failed at %d, hash=%s", pindex->nHeight, pindex->GetBlockHash().ToString());
 
-            dev::h256 oldHashStateRoot(globalState->rootHash()); // marbellachain
-            dev::h256 oldHashUTXORoot(globalState->rootHashUTXO()); // marbellachain
+            dev::h256 oldHashStateRoot(globalState->rootHash()); // mchain
+            dev::h256 oldHashUTXORoot(globalState->rootHashUTXO()); // mchain
 
             if (!g_chainstate.ConnectBlock(block, state, pindex, coins, chainparams)){
 
-                globalState->setRoot(oldHashStateRoot); // marbellachain
-                globalState->setRootUTXO(oldHashUTXORoot); // marbellachain
+                globalState->setRoot(oldHashStateRoot); // mchain
+                globalState->setRootUTXO(oldHashUTXORoot); // mchain
                 pstorageresult->clearCacheResult();
                 return error("VerifyDB(): *** found unconnectable block at %d, hash=%s", pindex->nHeight, pindex->GetBlockHash().ToString());
             }
         }
     } else {
-        globalState->setRoot(oldHashStateRoot); // marbellachain
-        globalState->setRootUTXO(oldHashUTXORoot); // marbellachain
+        globalState->setRoot(oldHashStateRoot); // mchain
+        globalState->setRootUTXO(oldHashUTXORoot); // mchain
     }
 
     LogPrintf("[DONE].\n");
@@ -5640,7 +5640,7 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, CDiskB
                 }
 
                 // In Bitcoin this only needed to be done for genesis and at the end of block indexing
-                // But for MarbellaChain PoS we need to sync this after every block to ensure txdb is populated for
+                // But for Mchain PoS we need to sync this after every block to ensure txdb is populated for
                 // validating PoS proofs
                 {
                     CValidationState state;

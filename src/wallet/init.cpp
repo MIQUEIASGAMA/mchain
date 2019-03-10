@@ -307,14 +307,14 @@ void StartWallets(CScheduler& scheduler) {
     else {
         for (CWalletRef pwallet : vpwallets) {
             if (pwallet)
-                StakeMarbellaChains(true, pwallet);
+                StakeMchains(true, pwallet);
         }
     }
 }
 
 void FlushWallets() {
     for (CWalletRef pwallet : vpwallets) {
-        StakeMarbellaChains(false, pwallet);
+        StakeMchains(false, pwallet);
         pwallet->Flush(false);
     }
 }
